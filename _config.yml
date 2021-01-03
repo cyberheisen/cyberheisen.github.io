@@ -18,12 +18,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "Cyberheisen's Page"
+title: Cyberheisen's Page
 email:
-description: "My place to store notes, code, and other musings."
+description: My place to store notes, code, and other musings.
 baseurl: "" # the subpath of your site, e.g. /blog
-twitter_username: "@cyberheisen"
-github_username:  "cyberheisen"
+twitter_username: 
+github_username:  cyberheisen
 
 # Build settings
 theme: minima
