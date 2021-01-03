@@ -22,7 +22,6 @@ title: Cyberheisen's Page
 email:
 description: My place to store notes, code, and other musings.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://cyberheisen.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: @cyberheisen
 github_username:  cyberheisen
 
