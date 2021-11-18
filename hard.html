@@ -505,7 +505,7 @@ Nmap done: 1 IP address (1 host up) scanned in 1088.49 seconds
 Logging in as admin:admin did not work.  Registered new user groovy:groovy<br>
 <img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/6c6708d46d3e47c7a4bac62ef3776bb5.png" alt="11def9dbf0661a2229ca75e7323fd55a.png"></p>
 <p>That let us in.  Static profile and blog pages are available.  Looking at the blog page, there are a number of vulerabilities listed.  Could these be a hint?  I spent some time working through each one, but was not successful.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/4c74dcadc9ee43e586c43fb3ccabc44f.png" alt="51a607ec8461a004aa12712606164dcc.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/4c74dcadc9ee43e586c43fb3ccabc44f.png" alt="51a607ec8461a004aa12712606164dcc.png"></p>
 <p>We need to do some additional enumeration to see if there are any hidden folders or directories.</p>
 <div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ dirb http://overflow/config/ /usr/share/wordlists/dirb/big.txt -X .php -o tcp_80_http_dirb_config_php.txt
 
@@ -606,7 +606,7 @@ GENERATED WORDS: <span class="hljs-number">4612</span>
 END_TIME: Wed Nov <span class="hljs-number">10</span> <span class="hljs-number">15</span>:<span class="hljs-number">06</span>:<span class="hljs-number">57</span> <span class="hljs-number">2021</span>
 DOWNLOADED: <span class="hljs-number">4612</span> - FOUND: <span class="hljs-number">3</span></code></pre></div>
 <p>logs.php is new.<br>
-<img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/179cbda4ec824955bce4e99971e6fc30.png" alt="abd0784051cd19086053317df6408293.png"></p>
+<img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/179cbda4ec824955bce4e99971e6fc30.png" alt="abd0784051cd19086053317df6408293.png"></p>
 <p>Looks like we need to be admin or at least bypass the authorization checks.</p>
 <p>Digging into the headers, I noticed that after registering an account we are given an &quot;Auth&quot; cookie value.</p>
 <div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">GET /home/index.php HTTP/1.1
@@ -629,11 +629,11 @@ Upgrade-Insecure-Requests: 1</pre><pre class="hljs"><code><span class="hljs-keyw
 <span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>auth=TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E
 <span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1</code></pre></div>
 <p>Trying to decode the value doesn't provide anything useful.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/3666a48eb9ff4b29ad323e4c7394bab6.png" alt="c446dad01904a4d0c7f306ed1c395405.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/3666a48eb9ff4b29ad323e4c7394bab6.png" alt="c446dad01904a4d0c7f306ed1c395405.png"></p>
 <p>Let's modify the value and see what the program does.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/3caeffd6ab31495a8e7a060e38238fa0.png" alt="7414cd2e985deaa288a6b85bfb0ea731.png"><br>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/3caeffd6ab31495a8e7a060e38238fa0.png" alt="7414cd2e985deaa288a6b85bfb0ea731.png"><br>
 If we modify the value by adding or removing characters, we receive a 302 HTTP code.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/420647f635b7477789ccf93bce315054.png" alt="9309fab0d6a41cd6a01cc9f10a07bf24.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/420647f635b7477789ccf93bce315054.png" alt="9309fab0d6a41cd6a01cc9f10a07bf24.png"></p>
 <p>This could be indicitive of CBC encryption, which can be reversed using a Padding Oracle Attack.</p>
 <p>Here's a good introductory reference: <a data-from-md title='https://pentesterlab.com/exercises/padding_oracle/course' href='https://pentesterlab.com/exercises/padding_oracle/course'>https://pentesterlab.com/exercises/padding_oracle/course</a></p>
 <p>We'll use padbuster to attempt the padding oracle attack.</p>
@@ -797,16 +797,16 @@ Block 2 Results:
 
 [+] <span class="hljs-keyword">Encrypted</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span>: BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA</code></pre></div>
 <p>We'll add a match and replace value in burp with the new cookie value.<br>
-<img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/d045b53a54e74d0d99ca93794438ec1e.png" alt="0423ed51cc90e941a2462a2844c1f911.png"></p>
+<img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/d045b53a54e74d0d99ca93794438ec1e.png" alt="0423ed51cc90e941a2462a2844c1f911.png"></p>
 <p>Visiting the website now provides us with additional admin options.<br>
-<img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/68f5d3ee8dfc40ddb72b1e3c16daac87.png" alt="f289b97e393ff9216aaae3f303754308.png"></p>
+<img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/68f5d3ee8dfc40ddb72b1e3c16daac87.png" alt="f289b97e393ff9216aaae3f303754308.png"></p>
 <p>Let's check out the admin panel.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/da4cfe04aecb4c29830e2a8b58195024.png" alt="8f083cb8f9ad5ddef28df79916a41b6f.png"><br>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/da4cfe04aecb4c29830e2a8b58195024.png" alt="8f083cb8f9ad5ddef28df79916a41b6f.png"><br>
 admin:admin did not work.</p>
 <p>There are a ton of exploits for CMS made simple, but most require authentication and we don't know what version we're dealing with here.</p>
 <p>Going to the logs.php page directly no longer gives us the Unauthorized message.  However, we are greeted with a blank page.</p>
 <p>The logs link on the admin's home page doesn't work; only bringing up an &quot;undefined&quot; pop-up.<br>
-<img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/2b41502e784940fd86170413a33c2ded.png" alt="04482b5326fcffe2757980df38782ace.png"></p>
+<img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/2b41502e784940fd86170413a33c2ded.png" alt="04482b5326fcffe2757980df38782ace.png"></p>
 <p>I looked at the source code to see how it was configured and noticed an interesting script.</p>
 <div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">&lt;script src='../config/admin_last_login.js'&gt;&lt;/script&gt;</pre><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;../config/admin_last_login.js&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
 <p>Now we're talking.</p>
@@ -846,11 +846,11 @@ renderUsers();</pre><pre class="hljs"><code><span class="hljs-keyword">async</sp
 
 renderUsers();</code></pre></div>
 <p>It seems the logs.php page requires input to work.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/6e40ade03566482d986ab1da4cc2d326.png" alt="0798941c0534f3231f56db51aa2f9cf4.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/6e40ade03566482d986ab1da4cc2d326.png" alt="0798941c0534f3231f56db51aa2f9cf4.png"></p>
 <p>We need to find the version of the CMS software running.  Because it's open source, I looked up the source code and identified a file we could check which would provide the version.</p>
 <p><a data-from-md title='http://viewsvn.cmsmadesimple.org/filedetails.php?repname=cmsmadesimple&amp;path=%2Fbranches%2Fv2.1.x%2Fdoc%2FCHANGELOG.txt' href='http://viewsvn.cmsmadesimple.org/filedetails.php?repname=cmsmadesimple&amp;path=%2Fbranches%2Fv2.1.x%2Fdoc%2FCHANGELOG.txt'>http://viewsvn.cmsmadesimple.org/filedetails.php?repname=cmsmadesimple&amp;path=%2Fbranches%2Fv2.1.x%2Fdoc%2FCHANGELOG.txt</a></p>
 <p>And bingo, the file exists on our server and we identify the version of CMS Made Simple as 2.2.8</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/5521eab0260546e5bb23739917c364c3.png" alt="a87b0cc7f1b48d054c38fd7ac93882b6.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/5521eab0260546e5bb23739917c364c3.png" alt="a87b0cc7f1b48d054c38fd7ac93882b6.png"></p>
 <p>With the version number in hand, let's research any available exploits</p>
 <p><a data-from-md title='https://www.exploit-db.com/exploits/46635' href='https://www.exploit-db.com/exploits/46635'>CMS Made Simple &lt; 2.2.10 - SQL Injection</a></p>
 <p>Digging into the log.php page a bit more.  We ran sqlmap against the name parameter and discovered the value was vulenrable to injection</p>
@@ -1040,21 +1040,21 @@ editor:e3d748d58b58657bfa4dffe2def0b1c7</p>
 <p>The admin password failed to crack, but the editor password was found.</p>
 <p>alpha!@#$%bravo</p>
 <p>Trying editor:alpha!@#$%bravo at the CMS login screen gives us access!!</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/2526ceb279594673beacc717c5cb2384.png" alt="07179f1aa89d230775b93459fed81824.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/2526ceb279594673beacc717c5cb2384.png" alt="07179f1aa89d230775b93459fed81824.png"></p>
 <p>Now that we have valid credentials, we can revisit the exploit database and see if any of the authenticated RCE exploits will work for us.</p>
 <p>This one looks super promising<br>
 <a data-from-md title='https://www.exploit-db.com/exploits/49345' href='https://www.exploit-db.com/exploits/49345'>https://www.exploit-db.com/exploits/49345</a></p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/995adfbab9c44b5f8e2dd2f5bdb7000e.png" alt="3134df610f09423da7bb6937353809c2.png"><br>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/995adfbab9c44b5f8e2dd2f5bdb7000e.png" alt="3134df610f09423da7bb6937353809c2.png"><br>
 However, it failed to provide a return shell.</p>
 <p>But this existing defined tag looks like something we need to dig into.<br>
-<img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/e19f71487504482f9cb9cb328e53fa7b.png" alt="5a9feeabf23a69b047c49b3bec2924d7.png"></p>
+<img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/e19f71487504482f9cb9cb328e53fa7b.png" alt="5a9feeabf23a69b047c49b3bec2924d7.png"></p>
 <p>We'll need to add the new hostname to our hosts file.  Once that's done, we can browse to it.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/8f9a3fbbe92548f9b5129fdccc6a21fe.png" alt="775ba6c51b26ddb0002897169d950b9a.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/8f9a3fbbe92548f9b5129fdccc6a21fe.png" alt="775ba6c51b26ddb0002897169d950b9a.png"></p>
 <p>We're able to log in using the editor credentials from CMS.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/85de84a6eb1f431eaabcd5918748b486.png" alt="743f552eaa4f76b8e7eedd9c38d2253c.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/85de84a6eb1f431eaabcd5918748b486.png" alt="743f552eaa4f76b8e7eedd9c38d2253c.png"></p>
 <p>Poking around on the website, we find an upload function when we click on our account.  I tried uploading a php webshell, but it failed due to unsupported filetype.</p>
 <p>I noticed the response through burp showed an <code class="inline-code">exiftool</code> output.  There's a well known exploit using this tool that will allow for php remote code execution.</p>
-<p><img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/a12be383e57b4f2a923312b1ef123daf.png" alt="c6a86439dd5a95304cabdb4227bbf91a.png"></p>
+<p><img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/a12be383e57b4f2a923312b1ef123daf.png" alt="c6a86439dd5a95304cabdb4227bbf91a.png"></p>
 <div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">HTTP/1.1 302 Moved Temporarily
 Date: Sun, 14 Nov 2021 22:32:43 GMT
 Server: Apache/2.4.29 (Ubuntu)
@@ -1622,7 +1622,7 @@ tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/op
 file_encrypt                                                                                                        100%   12KB 232.8KB/s   00:00   </pre><pre class="hljs"><code><span class="hljs-variable">$ </span>scp -i ../ssh_keys/tester tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt/file_encrypt</span> ./file_encrypt                                       [<span class="hljs-number">21</span><span class="hljs-number">-11</span><span class="hljs-number">-15</span> <span class="hljs-number">13</span><span class="hljs-symbol">:</span><span class="hljs-number">36</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span>]
 file_encrypt                                                                                                        <span class="hljs-number">100</span>%   <span class="hljs-number">12</span>KB <span class="hljs-number">232.8</span>KB/s   <span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span>   </code></pre></div>
 <p>Using Ghidra, we can see some e functions.<br>
-<img src="_https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/5a77fa33c3c04c208d1b0caeb393af0a.png" alt="888e508254cffc68b796c63c5c3cb199.png"></p>
+<img src="https://github.com/cyberheisen/cyberheisen.github.io/raw/master/_resources/5a77fa33c3c04c208d1b0caeb393af0a.png" alt="888e508254cffc68b796c63c5c3cb199.png"></p>
 <p>Let's start with the check_pin function.  Perhaps we can reverse the code to determine a valid PIN.</p>
 <div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">void check_pin(void)
 
