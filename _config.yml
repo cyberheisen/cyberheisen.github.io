@@ -29,17 +29,6 @@ github_username:  cyberheisen
 theme: minima
 plugins:
   - jekyll-feed
-  - jekyll-seo-tab
-  - jekyll-sitemap
-nav:
-  - name: "Home"
-    url: "/"
-  - name: "Projects"
-    url: "/#projets"
-  - name: "Links"
-    url: "/links"
-  - name: "About"
-    url: "/about"
     
 # Exclude from processing.
 # The following items will not be processed, by default.
