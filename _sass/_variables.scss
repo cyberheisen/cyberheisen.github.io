@@ -1,0 +1,23 @@
+// Color tokens
+$bg:             #0d0d0d;
+$surface:        #111827;
+$surface-2:      #1a2133;
+$border:         #1e2d40;
+$accent-green:   #00ff9f;
+$accent-cyan:    #00b4d8;
+$accent-red:     #ff4757;
+$text:           #c9d1d9;
+$text-muted:     #6e7f96;
+$text-bright:    #e6edf3;
+$code-bg:        #161b22;
+
+// Typography
+$font-body:      'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-mono:      'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+// Spacing / layout
+$max-width:      860px;
+$nav-height:     56px;
+
+// Transitions
+$transition:     0.2s ease;

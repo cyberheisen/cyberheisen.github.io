@@ -1,0 +1,18 @@
+{% assign post = include.post %}
+{% assign category = post.categories | first | downcase %}
+<article class="post-card">
+  <div class="post-card-meta">
+    <time class="post-card-date" datetime="{{ post.date | date_to_xmlschema }}">
+      {{ post.date | date: "%Y-%m-%d" }}
+    </time>
+    {% for cat in post.categories %}
+      <span class="badge badge-{{ cat | downcase }}">{{ cat }}</span>
+    {% endfor %}
+  </div>
+  <a href="{{ post.url | relative_url }}" class="post-card-title">{{ post.title }}</a>
+  {% if post.description %}
+    <p class="post-card-excerpt">{{ post.description }}</p>
+  {% elsif post.excerpt %}
+    <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+  {% endif %}
+</article>

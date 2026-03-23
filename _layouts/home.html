@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<div class="terminal-hero">
+  <div class="terminal-titlebar">
+    <span class="dot red"></span>
+    <span class="dot yellow"></span>
+    <span class="dot green"></span>
+    <span class="title">bash — cyberheisen</span>
+  </div>
+  <div class="terminal-body">
+    <span class="terminal-line prompt">whoami</span>
+    <span class="terminal-line output">{{ site.author.name | downcase }}</span>
+    <span class="terminal-line blank"></span>
+    <span class="terminal-line prompt">cat about.txt</span>
+    <span class="terminal-line output">penetration tester. ctf player.</span>
+    <span class="terminal-line output">notes on breaking things, legally.</span>
+    <span class="terminal-line output">background: networking | cyber intel | malware analysis</span>
+    <span class="terminal-line blank"></span>
+    <span class="terminal-line prompt">ls -la ./posts/<span class="terminal-cursor"></span></span>
+  </div>
+</div>
+
+<p class="section-label">recent posts</p>
+
+{% if site.posts.size > 0 %}
+  <div class="post-list">
+    {% for post in site.posts limit:10 %}
+      {% include post-card.html post=post %}
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty-state">no posts yet</div>
+{% endif %}
+
+{{ content }}

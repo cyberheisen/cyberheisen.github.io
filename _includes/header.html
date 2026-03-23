@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="container">
+    <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="this.closest('.site-header').querySelector('.site-nav').classList.toggle('open')">
+      &#9776;
+    </button>
+
+    <nav class="site-nav">
+      <a href="{{ '/writeups/' | relative_url }}"{% if page.url contains '/writeups' or page.categories contains 'CTF' %} class="active"{% endif %}>writeups</a>
+      <a href="{{ '/notes/' | relative_url }}"{% if page.url contains '/notes' or page.categories contains 'Notes' %} class="active"{% endif %}>notes</a>
+      <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} class="active"{% endif %}>about</a>
+      <a href="https://github.com/{{ site.author.github }}" class="external" target="_blank" rel="noopener">github</a>
+    </nav>
+  </div>
+</header>

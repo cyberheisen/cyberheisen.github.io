@@ -1,0 +1,106 @@
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: calc(#{$nav-height} + 2rem);
+  padding-bottom: 4rem;
+}
+
+// Category index pages
+.category-header {
+  margin-bottom: 2.5rem;
+
+  h1 {
+    font-family: $font-mono;
+    font-size: 1.4rem;
+    color: $accent-green;
+    margin-bottom: 0.25rem;
+
+    &::before {
+      content: '> ';
+      color: $text-muted;
+    }
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+// Page layout (about, etc.)
+.page-content {
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Skills grid
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.skill-card {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: 6px;
+  padding: 1rem;
+  transition: border-color $transition;
+
+  &:hover {
+    border-color: $accent-green;
+  }
+
+  h4 {
+    margin: 0 0 0.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $accent-green;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+
+    li {
+      font-size: 0.875rem;
+      color: $text;
+      margin-bottom: 0.2rem;
+      padding-left: 0.75rem;
+      position: relative;
+
+      &::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        color: $text-muted;
+        font-size: 0.7rem;
+        top: 0.1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content {
+    padding-top: calc(#{$nav-height} + 1rem);
+    padding-bottom: 2rem;
+  }
+}
